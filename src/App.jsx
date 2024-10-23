@@ -4,6 +4,7 @@ import Logo from "./components/logo/logo";
 import Title from "./components/title/title";
 import InputStyle from "./components/inpytStyle/inputStyle";
 import Header from "./components/header/header";
+import Subtitle from "./components/subtitle/subtitle";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     return (
         <div className={styles.app}>
             <Header/>
+            <Subtitle/>
         </div>
     )
 }
