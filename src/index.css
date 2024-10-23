@@ -1,9 +1,14 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+* {
+    margin: 0;
+    font-family: sans-serif, Inter, system-ui, Avenir, Helvetica, Arial;
+    line-height: 1.5;
+    font-weight: lighter;
+    letter-spacing: 1.5px;
+    color: #fff;
+}
 
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

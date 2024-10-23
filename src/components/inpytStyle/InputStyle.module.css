@@ -1,0 +1,17 @@
+.input {
+    outline: none;
+    width: 220px;
+    padding: 7px;
+    box-sizing: border-box;
+    background-color: inherit;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    font-size: 16px;
+    line-height: 25px;
+    transition: border 0.2s;
+}
+
+.input:hover {
+    cursor: pointer;
+    border: 2px solid #B996D7;
+}
