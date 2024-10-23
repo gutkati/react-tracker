@@ -5,6 +5,7 @@ import Title from "./components/title/title";
 import InputStyle from "./components/inpytStyle/inputStyle";
 import Header from "./components/header/header";
 import Subtitle from "./components/subtitle/subtitle";
+import Footer from "./components/footer/footer";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <div className={styles.app}>
             <Header/>
             <Subtitle/>
+            <Footer/>
         </div>
     )
 }
