@@ -14,3 +14,7 @@ export const gradientColor = [
     'gradient6',
     'gradient7',
 ]
+
+export const arrMonths = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек',]
+
+export let days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];

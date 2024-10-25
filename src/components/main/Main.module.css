@@ -68,77 +68,7 @@
     justify-content: space-between;
 }
 
-.box__day {
-    width: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.square {
-    width: 38px;
-    height: 38px;
-    background-color: rgba(217, 217, 217, .25);
-    text-align: center;
-}
-
-.square p {
-    padding-top: 8px;
-}
-
-.circle {
-    width: 47px;
-    height: 47px;
-    border-radius: 50%;
-    margin: 10px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.gradient1 {
-    background-image: linear-gradient(#1FC5F5, #C6DB26);
-}
-
-.gradient2 {
-    background-image: linear-gradient(#E16A77, #C6DB26);
-}
-
-.gradient3 {
-    background-image: linear-gradient(#1FC5F5, #EE8362);
-}
-
-.gradient4 {
-    background-image: linear-gradient(#E16A77, #A55977);
-}
-
-.gradient5 {
-    background-image: linear-gradient(#1FC5F5, #9862AE);
-}
-
-.gradient6 {
-    background-image: linear-gradient(#E6D94D, #EE8362);
-}
-
-.gradient7 {
-    background-image: linear-gradient(#E6D94D, #A55977);
-}
-
-.little__circle {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #5F2B70;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.month {
-
-}
 
 .container__filter {
     display: flex;
