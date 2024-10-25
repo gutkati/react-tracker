@@ -1,0 +1,15 @@
+.info__box {
+    max-width: 230px;
+    min-height: 340px;
+    width: fit-content;
+    height: fit-content;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 23px;
+    background-color: rgba(217, 217, 217, .25);
+}
+
+.text {
+    font-size: 14px;
+    opacity: .8;
+}

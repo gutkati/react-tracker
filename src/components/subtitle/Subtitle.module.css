@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+.subtitle p:first-child {
+    margin-left: 80px;
+}
+
 .text {
     color: #B996D7;
     font-size: 20px;

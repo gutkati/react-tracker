@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.header .logo:first-child {
+    margin-left: 80px;
+}
+
 .box__buttons {
     display: flex;
     flex-direction: row;

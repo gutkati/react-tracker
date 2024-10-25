@@ -7,11 +7,14 @@ import Logo from "../logo/logo";
 const Header = () => {
     return (
         <div className={styles.header}>
-            <Logo/>
+            <div className={styles.logo}>
+                <Logo/>
+            </div>
+
             <Title text='Универсальный трекер дел'/>
             <div className={styles.box__buttons}>
                 <div className={styles.btn__settings}></div>
-                <InputStyle  value='Добавить' type='button'/>
+                <InputStyle  value='Добавить' type='button' size='size__small'/>
             </div>
 
         </div>

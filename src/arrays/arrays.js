@@ -1,0 +1,16 @@
+export const gradientColor = [
+    'gradient1',
+    'gradient2',
+    'gradient3',
+    'gradient4',
+    'gradient5',
+    'gradient6',
+    'gradient7',
+    'gradient1',
+    'gradient2',
+    'gradient3',
+    'gradient4',
+    'gradient5',
+    'gradient6',
+    'gradient7',
+]
