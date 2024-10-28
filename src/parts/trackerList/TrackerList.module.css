@@ -1,0 +1,83 @@
+.trackerList {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+
+}
+
+.subtitle {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 32px;
+    color: #B996D7;
+    line-height: 40px;
+}
+
+.container__list {
+    flex: 1;
+}
+
+.decor {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 40px;
+}
+
+.list__circle {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.decor__circle {
+    composes: circle from '../../components/day/Day.module.css';
+}
+
+.gradient1 {
+    background-image: linear-gradient(#1FC5F5, #C6DB26);
+}
+
+.gradient2 {
+    background-image: linear-gradient(#E16A77, #C6DB26);
+}
+
+.gradient3 {
+    background-image: linear-gradient(#1FC5F5, #EE8362);
+}
+
+.gradient4 {
+    background-image: linear-gradient(#E16A77, #A55977);
+}
+
+.gradient5 {
+    background-image: linear-gradient(#1FC5F5, #9862AE);
+}
+
+.gradient6 {
+    background-image: linear-gradient(#E6D94D, #EE8362);
+}
+
+.gradient7 {
+    background-image: linear-gradient(#E6D94D, #A55977);
+}
+
+.border {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, .6);
+}

@@ -1,21 +1,31 @@
 import {useState} from 'react'
-import styles from './App.module.css'
-import Header from "./components/header/header";
-import Subtitle from "./components/subtitle/subtitle";
-import Footer from "./components/footer/footer";
-import Main from "./components/main/main";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import Root from "./root";
+import TrackerList from "./parts/trackerList/trackerList";
 
+
+const router = createBrowserRouter([
+    {
+        path: '/track',
+        element: <Root/>
+    },
+
+    {
+        path: '/trackers',
+        element: <TrackerList/>
+    },
+
+    {
+        path: '/',
+        element: <TrackerList/>
+    }
+
+
+])
 
 function App() {
 
-    return (
-        <div className={styles.app}>
-            <Header/>
-            <Subtitle/>
-            <Main/>
-            <Footer/>
-        </div>
-    )
+    return <RouterProvider router={router}/>
 }
 
 export default App

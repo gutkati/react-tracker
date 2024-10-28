@@ -44,6 +44,7 @@
 
 .marks {
     margin: 0 20px;
+
 }
 
 .next {
@@ -67,7 +68,6 @@
     flex-direction: row;
     justify-content: space-between;
 }
-
 
 
 .container__filter {

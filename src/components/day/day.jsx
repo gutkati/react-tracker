@@ -7,15 +7,16 @@ const Day = ({index, date}) => {
     let gradient = gradientColor[index]
     const currentDate = new Date()
 
-    console.log('333', currentDate)
+    // console.log('333', currentDate)
 
     const num = date.getDate()
     const month = arrMonths[date.getMonth()]
     const day = days[date.getDay()]
 
-    console.log('currentDate', currentDate.setDate(currentDate.getDate()))
-    console.log('date', date.setDate(date.getDate()))
+    // console.log('currentDate', currentDate.toDateString())
+    // console.log('date', date.toDateString())
 
+    // Чтобы сравнить две даты, лучше использовать toDateString(), это позволит сравнить только день, месяц и год
     return (
         <div className={styles.box__day}>
             <div
