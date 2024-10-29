@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./root";
 import TrackerList from "./parts/trackerList/trackerList";
+import EditTracker from "./parts/editTrcaker/editTracker";
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
 
     {
         path: '/',
-        element: <TrackerList/>
+        element: <EditTracker/>
     }
 
 
