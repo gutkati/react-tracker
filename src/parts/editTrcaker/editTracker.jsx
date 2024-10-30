@@ -7,6 +7,7 @@ import Checkbox from "../../components/checkbox/checkbox";
 import Footer from "../../components/footer/footer";
 import ButtonUnderline from "../../components/buttonUnderline/buttonUnderline";
 import {arrColors} from "../../arrays/arrays";
+import {NavLink} from "react-router-dom";
 
 const EditTracker = () => {
 
@@ -60,7 +61,7 @@ const EditTracker = () => {
                 <div className={stylesEdit.container__input} onClick={(e) => stopPropagation(e)}>
                     <p className={stylesEdit.title__input}>Цвет кнопки:</p>
 
-                    <div className={stylesEdit.container__color2} >
+                    <div className={stylesEdit.container__color2}>
                         <div className={stylesEdit.btn__circle}/>
                         <div className={stylesEdit.btn__mark} onClick={showModal}/>
                     </div>
@@ -82,8 +83,12 @@ const EditTracker = () => {
             </form>
 
             <div className={stylesEdit.container__buttons}>
-                <ButtonUnderline text='к списку трекеров'/>
-                <ButtonUnderline text='на главную'/>
+                <NavLink to='/trackers'>
+                    <ButtonUnderline text='к списку трекеров'/>
+                </NavLink>
+                <NavLink to='/'>
+                    <ButtonUnderline text='на главную'/>
+                </NavLink>
                 <ButtonUnderline text='удалить трекер'/>
 
             </div>

@@ -7,6 +7,7 @@ import stylesList from './TrackerList.module.css'
 import Footer from "../../components/footer/footer";
 import {gradientColorMini} from "../../arrays/arrays";
 import ButtonUnderline from "../../components/buttonUnderline/buttonUnderline";
+import {NavLink} from "react-router-dom";
 
 const TrackerList = () => {
 
@@ -19,9 +20,9 @@ const TrackerList = () => {
                 </div>
 
                 <Title text='Универсальный трекер дел'/>
-                <div className={styles.box__buttons}>
+                <NavLink to='/editTracker' className={styles.box__buttons}>
                     <InputStyle value='Добавить' type='button' size='size__small'/>
-                </div>
+                </NavLink>
             </header>
 
             <div className={stylesList.subtitle}>
@@ -30,9 +31,9 @@ const TrackerList = () => {
 
             <div className={stylesList.container__list}></div>
 
-            <div>
+            <NavLink to='/'>
                 <ButtonUnderline text='на главную'/>
-            </div>
+            </NavLink>
 
             <div className={stylesList.decor}>
                 <div className={stylesList.list__circle}>

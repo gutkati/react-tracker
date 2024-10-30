@@ -7,7 +7,7 @@ import EditTracker from "./parts/editTrcaker/editTracker";
 
 const router = createBrowserRouter([
     {
-        path: '/track',
+        path: '/',
         element: <Root/>
     },
 
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path: '/',
+        path: '/editTracker',
         element: <EditTracker/>
     }
 
