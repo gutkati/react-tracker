@@ -1,12 +1,3 @@
-/*.checkbox__container {*/
-/*    width: 35px;*/
-/*    height: 35px;*/
-/*    background: rgba(215, 215, 215, 0.25);*/
-/*    accent-color: #82C341;*/
-/*    cursor: pointer;*/
-/*}*/
-
-
 /* Контейнер для чекбокса */
 .checkbox__container {
   display: inline-flex;
@@ -27,14 +18,9 @@
   height: 35px;
   background: rgba(215, 215, 215, 0.25);
   position: relative;
-  margin-right: 8px;
   transition: background-color 0.3s;
+  border-radius: 3px;
 }
-
-/*!* Стили для состояния "чекнут" *!*/
-/*.checkbox__container input[type="checkbox"]:checked + .checkmark {*/
-/*  background-color: #4caf50;*/
-/*}*/
 
 /* Иконка галочки */
 .check__mark::after {
@@ -53,4 +39,8 @@
 /* Показываем галочку, если чекбокс выбран */
 .checkbox__container input[type="checkbox"]:checked + .check__mark::after {
   display: block;
+}
+
+.check__mark:hover {
+  box-shadow: 0 0 5px #3D1B62;
 }

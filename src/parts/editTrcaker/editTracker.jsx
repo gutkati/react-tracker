@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import styles from "../../components/header/Header.module.css";
 import Logo from "../../components/logo/logo";
 import Title from "../../components/title/title";
 import stylesEdit from './EditTracker.module.css'
@@ -7,17 +6,31 @@ import InputStyle from "../../components/inpytStyle/inputStyle";
 import Checkbox from "../../components/checkbox/checkbox";
 import Footer from "../../components/footer/footer";
 import ButtonUnderline from "../../components/buttonUnderline/buttonUnderline";
+import {arrColors} from "../../arrays/arrays";
 
 const EditTracker = () => {
 
     const [checked, setChecked] = useState(true)
+    const [modal, setModal] = useState(false)
+
+    const stopPropagation = (e) => {
+        e.stopPropagation()
+    }
 
     const onCheckedChange = () => {
         setChecked(!checked)
     }
 
+    function showModal() {
+        setModal(true)
+    }
+
+    function closeModalColor() {
+        setModal(false)
+    }
+
     return (
-        <div className={stylesEdit.edit__tracker}>
+        <div className={stylesEdit.edit__tracker} onClick={closeModalColor}>
             <header className={stylesEdit.header}>
                 <div className={stylesEdit.logo}>
                     <Logo/>
@@ -44,18 +57,12 @@ const EditTracker = () => {
                     />
                 </div>
 
-                <div className={stylesEdit.container__input}>
+                <div className={stylesEdit.container__input} onClick={(e) => stopPropagation(e)}>
                     <p className={stylesEdit.title__input}>Цвет кнопки:</p>
-                    <div className={stylesEdit.container__color}>
-                        <label className={stylesEdit.color__picker}>
-                            <input type="color" id="colorInput" onInput="updateColor()"/>
-                            <span className={stylesEdit.color__display}></span>
-                        </label>
 
-                        <label className={stylesEdit.check__mark}>
-                            <input type="color" id="colorInput" onInput="updateColor()"/>
-                            <span className={stylesEdit.check__display}></span>
-                        </label>
+                    <div className={stylesEdit.container__color2} >
+                        <div className={stylesEdit.btn__circle}/>
+                        <div className={stylesEdit.btn__mark} onClick={showModal}/>
                     </div>
                 </div>
 
@@ -70,7 +77,8 @@ const EditTracker = () => {
                 </div>
 
                 <div className={stylesEdit.gradient__border}>
-                    Сохранить</div>
+                    Сохранить
+                </div>
             </form>
 
             <div className={stylesEdit.container__buttons}>
@@ -79,6 +87,18 @@ const EditTracker = () => {
                 <ButtonUnderline text='удалить трекер'/>
 
             </div>
+            {
+                modal ?
+                    <div className={stylesEdit.modal__colors} onClick={(e) => stopPropagation(e)}>
+                        <div className={stylesEdit.list__colors}>
+                            {arrColors.map((color, index) => (
+                                <div key={index} className={`${stylesEdit.circle__color} ${stylesEdit[color]}`}/>
+                            ))}
+                        </div>
+                    </div>
+                    : ''
+            }
+
 
             <Footer/>
         </div>
