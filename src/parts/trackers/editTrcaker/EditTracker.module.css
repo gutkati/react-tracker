@@ -65,13 +65,12 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background-color: #1FC5F5;
 }
 
 .btn__mark {
     width: 20px;
     height: 16px;
-    background-image: url("../../images/arrow.svg");
+    background-image: url("../../../images/arrow.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -80,7 +79,7 @@
 .btn__mark:hover {
     cursor: pointer;
     transition: background-image 0.3s;
-    background-image: url("../../images/arrow-hover.svg");
+    background-image: url("../../../images/arrow-hover.svg");
 }
 
 .check__display::after {
@@ -165,68 +164,7 @@
 .circle__color {
     width: 24px;
     height: 24px;
-    background-color: #1FC5F5;
     border-radius: 50%;
     margin: 10px;
     cursor: pointer;
-}
-
-.color1 {
-    background-color: #E16A77;
-}
-
-.color2 {
-    background-color: #EB199E;
-}
-
-.color3 {
-    background-color: #9045D1;
-}
-
-.color4 {
-    background-color: #D3EA26;
-}
-
-.color5 {
-    background-color: #E7BA09;
-}
-
-.color6 {
-    background-color: #EA902A;
-}
-
-.color7 {
-    background-color: #CF512A;
-}
-
-.color8 {
-    background-color: #0AB0E0;
-}
-
-.color9 {
-    background-color: #10CF39;
-}
-
-.color10 {
-    background-color: #538714;
-}
-
-.color11 {
-    background-color: #4851EE;
-}
-
-.color12 {
-    background-color: #09A989;
-}
-
-.color13 {
-    background-color: #180CBE;
-}
-
-.color14 {
-    background-color: #4D1A55;
-}
-
-.color15 {
-    background-color: #B21E3F;
 }

@@ -46,7 +46,7 @@
 }
 
 .decor__circle {
-    composes: circle from '../../components/day/Day.module.css';
+    composes: circle from '../../../components/day/Day.module.css';
 }
 
 .gradient1 {

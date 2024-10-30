@@ -1,18 +1,26 @@
 import React, {useState} from 'react';
-import Logo from "../../components/logo/logo";
-import Title from "../../components/title/title";
+import Logo from "../../../components/logo/logo";
+import Title from "../../../components/title/title";
 import stylesEdit from './EditTracker.module.css'
-import InputStyle from "../../components/inpytStyle/inputStyle";
-import Checkbox from "../../components/checkbox/checkbox";
-import Footer from "../../components/footer/footer";
-import ButtonUnderline from "../../components/buttonUnderline/buttonUnderline";
-import {arrColors} from "../../arrays/arrays";
+import InputStyle from "../../../components/inpytStyle/inputStyle";
+import Checkbox from "../../../components/checkbox/checkbox";
+import Footer from "../../../components/footer/footer";
+import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
+import {colors} from "../../../arrays/arrays";
 import {NavLink} from "react-router-dom";
 
 const EditTracker = () => {
 
     const [checked, setChecked] = useState(true)
-    const [modal, setModal] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const [name, setName] = useState('')
+    const [quantity, setQuantity] = useState(0)
+    const [color, setColor] = useState('#0AB0E0')
+
+    const onNameChange = (e) => setName(e.target.value)
+    const onQuantityChange = (e) => setQuantity(e.target.value)
+    const onColorChange = (e) => setColor(e.target.value)
 
     const stopPropagation = (e) => {
         e.stopPropagation()
@@ -23,11 +31,16 @@ const EditTracker = () => {
     }
 
     function showModal() {
-        setModal(true)
+        setIsModalOpen(true)
     }
 
     function closeModalColor() {
-        setModal(false)
+        setIsModalOpen(false)
+    }
+
+    function handleColorSelect(color) {
+        setIsModalOpen(false)
+        setColor(color)
     }
 
     return (
@@ -47,6 +60,7 @@ const EditTracker = () => {
                     <InputStyle
                         size='size__big'
                         type='text'
+                        onChange={onNameChange}
                     />
                 </div>
 
@@ -55,6 +69,7 @@ const EditTracker = () => {
                     <InputStyle
                         size='size__big'
                         type='number'
+                        onChange={onQuantityChange}
                     />
                 </div>
 
@@ -62,7 +77,7 @@ const EditTracker = () => {
                     <p className={stylesEdit.title__input}>Цвет кнопки:</p>
 
                     <div className={stylesEdit.container__color2}>
-                        <div className={stylesEdit.btn__circle}/>
+                        <div className={stylesEdit.btn__circle} style={{backgroundColor: color}}/>
                         <div className={stylesEdit.btn__mark} onClick={showModal}/>
                     </div>
                 </div>
@@ -90,14 +105,18 @@ const EditTracker = () => {
                     <ButtonUnderline text='на главную'/>
                 </NavLink>
                 <ButtonUnderline text='удалить трекер'/>
-
             </div>
             {
-                modal ?
+                isModalOpen ?
                     <div className={stylesEdit.modal__colors} onClick={(e) => stopPropagation(e)}>
                         <div className={stylesEdit.list__colors}>
-                            {arrColors.map((color, index) => (
-                                <div key={index} className={`${stylesEdit.circle__color} ${stylesEdit[color]}`}/>
+                            {colors.map((color, index) => (
+                                <div
+                                    key={index}
+                                    className={stylesEdit.circle__color}
+                                    style={{backgroundColor: color}}
+                                    onClick={() => handleColorSelect(color)}
+                                />
                             ))}
                         </div>
                     </div>

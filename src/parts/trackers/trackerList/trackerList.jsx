@@ -1,12 +1,12 @@
 import React from 'react';
-import Logo from "../../components/logo/logo";
-import Title from "../../components/title/title";
-import InputStyle from "../../components/inpytStyle/inputStyle";
-import styles from "../../components/header/Header.module.css";
+import Logo from "../../../components/logo/logo";
+import Title from "../../../components/title/title";
+import InputStyle from "../../../components/inpytStyle/inputStyle";
+import styles from "../../../components/header/Header.module.css";
 import stylesList from './TrackerList.module.css'
-import Footer from "../../components/footer/footer";
-import {gradientColorMini} from "../../arrays/arrays";
-import ButtonUnderline from "../../components/buttonUnderline/buttonUnderline";
+import Footer from "../../../components/footer/footer";
+import {gradientColorMini} from "../../../arrays/arrays";
+import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
 import {NavLink} from "react-router-dom";
 
 const TrackerList = () => {
