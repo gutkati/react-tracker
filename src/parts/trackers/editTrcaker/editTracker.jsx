@@ -8,26 +8,30 @@ import Footer from "../../../components/footer/footer";
 import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
 import {colors} from "../../../arrays/arrays";
 import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAllTrackers, trackerAdded} from "../trackersSlice";
 
 const EditTracker = () => {
 
-    const [checked, setChecked] = useState(true)
+    const dispatch = useDispatch()
+
+    const [arrTrackers, setArrTrackers] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const [name, setName] = useState('')
     const [quantity, setQuantity] = useState(0)
     const [color, setColor] = useState('#0AB0E0')
+    const [message, setMessage] = useState(true)
 
     const onNameChange = (e) => setName(e.target.value)
     const onQuantityChange = (e) => setQuantity(e.target.value)
-    const onColorChange = (e) => setColor(e.target.value)
 
     const stopPropagation = (e) => {
         e.stopPropagation()
     }
 
     const onCheckedChange = () => {
-        setChecked(!checked)
+        setMessage(!message)
     }
 
     function showModal() {
@@ -41,6 +45,17 @@ const EditTracker = () => {
     function handleColorSelect(color) {
         setIsModalOpen(false)
         setColor(color)
+    }
+
+
+    function saveDataTracker() {
+        console.log('!!!', name, quantity, color, message)
+        if (name && quantity) {
+            dispatch(trackerAdded(name, quantity, color, message))
+
+            console.log('trackerAdded', trackerAdded(name, quantity, color, message))
+        }
+
     }
 
     return (
@@ -87,12 +102,12 @@ const EditTracker = () => {
                     <p className={stylesEdit.title__input}>Показывать уведомления:</p>
                     <Checkbox
                         info='showInfo'
-                        checked={checked}
+                        checked={message}
                         onChecked={onCheckedChange}
                     />
                 </div>
 
-                <div className={stylesEdit.gradient__border}>
+                <div className={stylesEdit.gradient__border} onClick={saveDataTracker}>
                     Сохранить
                 </div>
             </form>

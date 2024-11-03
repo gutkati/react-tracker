@@ -3,7 +3,7 @@ import styles from './Subtitle.module.css'
 
 const Subtitle = () => {
     let date = new Date()
-    let day = date.getDate()
+    let day = addZeroDate(date.getDate())
     let month = addZeroDate(date.getMonth() + 1)
     let year = date.getFullYear()
 

@@ -4,10 +4,18 @@ import InfoBox from "../infoBox/infoBox";
 import InputStyle from "../inpytStyle/inputStyle";
 import Day from "../day/day";
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
+import ButtonUnderline from "../buttonUnderline/buttonUnderline";
 
 const MainTracker = () => {
 
     let arrShowDays = getDaysRange()
+    //const trackers = useSelector(selectAllTrackers)
+    const trackers = useSelector(state => state.trackers.trackers)
+
+    //console.log('trackers', trackers.length)
+
 
     // Функция для получения списка дней
     function getDaysRange() {
@@ -34,7 +42,13 @@ const MainTracker = () => {
 
     return (
         <div className={styles.main}>
-            <InfoBox/>
+            {trackers.length
+                ?
+                <ButtonUnderline text='Все работает!!'/>
+                :
+                <InfoBox/>
+            }
+
 
             <div className={styles.container__main}>
                 <div className={styles.container__marks}>
