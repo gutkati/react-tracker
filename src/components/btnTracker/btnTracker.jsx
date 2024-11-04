@@ -16,7 +16,7 @@ const BtnTracker = ({name, quantity, color, message}) => {
 
     return (
         <div className={styles.container}>
-            <div className={styles.btn__tracker}>
+            <div className={styles.btn__tracker} style={{backgroundColor: color}}>
                 <p className={styles.mark__calendar}>{name}</p>
                 {
                     modalShow
@@ -33,9 +33,9 @@ const BtnTracker = ({name, quantity, color, message}) => {
             {
                 modalShow
                     ?
-                    <div className={styles.modal}>
+                    <div className={styles.modal} style={{backgroundColor: color}}>
                         <p><span>2 дня </span>до конца недели</p>
-                        <p>Запланировано: <span>5</span></p>
+                        <p>Запланировано: <span>{quantity}</span></p>
                         <p>Выполнено: <span>4</span></p>
                         <InputStyle type='button' value='Настройки'/>
                     </div>

@@ -10,8 +10,8 @@
     width: 220px;
     height: 47px;
     border-radius: 50px;
-    background-color: #1FC5F5;
-    padding: 8px 15px;
+    /*background-color: #1FC5F5;*/
+    padding: 8px 20px 8px 25px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -22,6 +22,7 @@
 
 .mark__calendar {
     cursor: pointer;
+    flex: 1;
 }
 
 .mark__calendar:active {
@@ -39,14 +40,15 @@
 .mark {
     border-radius: 50%;
     background-color: #FF243C;
-    width: 27px;
-    height: 27px;
+    width: 25px;
+    height: 25px;
     text-align: center;
     padding: 2px;
     box-sizing: border-box;
     position: absolute;
-    top: -17px;
-    left: 10px;
+    top: -11px;
+    left: -5px;
+    font-size: 14px;
 }
 
 .arrow__modal_close {
@@ -76,8 +78,8 @@
     box-sizing: border-box;
     border-radius: 25px;
     z-index: 2; /* Сделаем z-index больше, чтобы модалка была поверх фона */
-    margin: 10px 0 20px;
-    background-color: #1FC5F5;
+    margin: 10px 0;
+    /*background-color: #1FC5F5;*/
     position: relative; /* Позиционирование для псевдоэлемента */
 }
 

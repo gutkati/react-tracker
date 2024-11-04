@@ -40,13 +40,20 @@ const MainTracker = () => {
 
     return (
         <div className={styles.main}>
-            {trackers.length
+            <div className={styles.container__trackers}>
+                {trackers.length
                 ?
-                <BtnTracker name='Все работает!!'/>
+                trackers.map((tracker) => (
+                    <BtnTracker
+                        name={tracker.name}
+                        quantity={tracker.quantity}
+                        color={tracker.color}
+                        message={tracker.message}
+                    />))
                 :
                 <InfoBox/>
             }
-
+            </div>
 
             <div className={styles.container__main}>
                 <div className={styles.container__marks}>
