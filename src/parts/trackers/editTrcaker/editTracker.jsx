@@ -61,9 +61,9 @@ const EditTracker = () => {
     return (
         <div className={stylesEdit.edit__tracker} onClick={closeModalColor}>
             <header className={stylesEdit.header}>
-                <div className={stylesEdit.logo}>
+                <NavLink to='/' className={stylesEdit.logo}>
                     <Logo/>
-                </div>
+                </NavLink>
                 <div className={stylesEdit.container__title}>
                     <Title text='Настройки'/>
                 </div>

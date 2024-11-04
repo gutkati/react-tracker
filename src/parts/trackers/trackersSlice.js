@@ -1,18 +1,18 @@
 import {createSlice, nanoid, createAsyncThunk} from "@reduxjs/toolkit";
 
-// const initialState = [
-//     {
-//         id: nanoid(8),
-//         name: 'Йога',
-//         quantity: 4,
-//         color: '#B21E3F',
-//         message: true,
-//     },
-//
-// ]
+const arrTrackers = [
+    {
+        id: nanoid(8),
+        name: 'Йога',
+        quantity: 4,
+        color: '#B21E3F',
+        message: true,
+    },
+
+]
 
 const initialState = {
-    trackers: [],
+    trackers: arrTrackers,
 }
 
 const trackersSlice = createSlice({
@@ -21,7 +21,6 @@ const trackersSlice = createSlice({
     reducers: {
         trackerAdded: {
             reducer(state, action) { // обновлять стейт
-                //console.log('action', action.payload)
                 state.trackers.push(action.payload)
                 console.log('initialState', state.trackers)
             },
@@ -44,6 +43,4 @@ export const {trackerAdded} = trackersSlice.actions
 
 export default trackersSlice.reducer
 
-export const selectAllTrackers = (state) => {
-    console.log('88', state.trackers.trackers)
-    state.trackers.trackers}
+export const selectAllTrackers = (state) => state.trackers.trackers

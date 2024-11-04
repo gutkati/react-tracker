@@ -1,0 +1,104 @@
+.container {
+    max-width: 230px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn__tracker {
+    width: 220px;
+    height: 47px;
+    border-radius: 50px;
+    background-color: #1FC5F5;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.mark__calendar {
+    cursor: pointer;
+}
+
+.mark__calendar:active {
+    color: rgba(250, 250, 250, .6);
+    transition: background-image 0.3s;
+}
+
+.arrow__modal {
+    composes: btn__mark from '../../parts/trackers/editTrcaker/EditTracker.module.css';
+    border: none;
+    outline: none;
+    background-color: inherit;
+}
+
+.mark {
+    border-radius: 50%;
+    background-color: #FF243C;
+    width: 27px;
+    height: 27px;
+    text-align: center;
+    padding: 2px;
+    box-sizing: border-box;
+    position: absolute;
+    top: -17px;
+    left: 10px;
+}
+
+.arrow__modal_close {
+    width: 20px;
+    height: 16px;
+    background-image: url("../../images/arrow-open.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    outline: none;
+    background-color: inherit;
+}
+
+.arrow__modal_close:hover {
+    cursor: pointer;
+    transition: background-image 0.3s;
+    background-image: url("../../images/arrow-open-hover.svg");
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 25px;
+    z-index: 2; /* Сделаем z-index больше, чтобы модалка была поверх фона */
+    margin: 10px 0 20px;
+    background-color: #1FC5F5;
+    position: relative; /* Позиционирование для псевдоэлемента */
+}
+
+.modal::before {
+    content: "";
+    position: absolute; /* Фиксируем на всю область экрана */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Полупрозрачный черный цвет для затенения */
+    z-index: -1; /* Псевдоэлемент будет под модалкой */
+    border-radius: 25px;
+}
+
+.modal p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: rgba(215, 215, 215, 0.9);
+}
+
+.modal p span {
+    font-size: 16px;
+}

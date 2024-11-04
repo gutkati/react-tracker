@@ -15,9 +15,9 @@ const TrackerList = () => {
     return (
         <div className={stylesList.trackerList}>
             <header className={styles.header}>
-                <div className={styles.logo}>
+                <NavLink to='/' className={styles.logo}>
                     <Logo/>
-                </div>
+                </NavLink>
 
                 <Title text='Универсальный трекер дел'/>
                 <NavLink to='/editTracker' className={styles.box__buttons}>

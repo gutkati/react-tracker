@@ -7,15 +7,13 @@ import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
 import ButtonUnderline from "../buttonUnderline/buttonUnderline";
+import BtnTracker from "../btnTracker/btnTracker";
 
 const MainTracker = () => {
 
     let arrShowDays = getDaysRange()
-    //const trackers = useSelector(selectAllTrackers)
-    const trackers = useSelector(state => state.trackers.trackers)
-
-    //console.log('trackers', trackers.length)
-
+    const trackers = useSelector(selectAllTrackers)
+    //const trackers = useSelector(state => state.trackers.trackers)
 
     // Функция для получения списка дней
     function getDaysRange() {
@@ -44,7 +42,7 @@ const MainTracker = () => {
         <div className={styles.main}>
             {trackers.length
                 ?
-                <ButtonUnderline text='Все работает!!'/>
+                <BtnTracker name='Все работает!!'/>
                 :
                 <InfoBox/>
             }
