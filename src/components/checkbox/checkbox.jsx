@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Checkbox.module.css'
 
 const Checkbox = ({info, checked, onChecked}) => {
+
+    console.log('checked', checked)
     return (
 
         <label className={styles.checkbox__container}>

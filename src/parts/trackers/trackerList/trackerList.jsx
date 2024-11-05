@@ -8,18 +8,32 @@ import Footer from "../../../components/footer/footer";
 import {gradientColorMini} from "../../../arrays/arrays";
 import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
 import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {selectAllTrackers} from "../trackersSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAllTrackers, trackerChecked} from "../trackersSlice";
 import BtnTracker from "../../../components/btnTracker/btnTracker";
 import Checkbox from "../../../components/checkbox/checkbox";
 
 const TrackerList = () => {
 
     const trackers = useSelector(selectAllTrackers)
+    const dispatch = useDispatch()
 
-    const [checked, setChecked] = useState(true)
+    const onCheckedChange = (id) => {
 
-    const onCheckedChange = () => setChecked(!checked)
+        trackers.map(tracker => {
+
+            if (tracker.id === id) {
+                dispatch(
+                    trackerChecked({
+                        id: tracker.id,
+                        checked: !tracker.checked
+                    })
+                )
+            }
+            return tracker
+        })
+    }
+
 
     return (
         <div className={stylesList.trackerList}>
@@ -40,7 +54,9 @@ const TrackerList = () => {
 
             <div className={stylesList.container__list}>
                 {trackers.map((tracker) => (
-                    <div className={stylesList.container__trackers}>
+                    <div key={tracker.id}
+                         className={stylesList.container__trackers}
+                    >
                         <BtnTracker
                             name={tracker.name}
                             quantity={tracker.quantity}
@@ -49,8 +65,8 @@ const TrackerList = () => {
                         />
                         <Checkbox
                             info='showInfo'
-                            checked={checked}
-                            onChecked={onCheckedChange}
+                            checked={tracker.checked}
+                            onChecked={() => onCheckedChange(tracker.id)}
                         />
                     </div>
                 ))}

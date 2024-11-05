@@ -44,6 +44,7 @@ const MainTracker = () => {
                 {trackers.length
                 ?
                 trackers.map((tracker) => (
+                    tracker.checked &&
                     <BtnTracker
                         name={tracker.name}
                         quantity={tracker.quantity}

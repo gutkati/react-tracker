@@ -22,6 +22,7 @@ const EditTracker = () => {
     const [quantity, setQuantity] = useState(0)
     const [color, setColor] = useState('#0AB0E0')
     const [message, setMessage] = useState(true)
+    const [checked, setChecked] = useState(true)
 
     const onNameChange = (e) => setName(e.target.value)
     const onQuantityChange = (e) => setQuantity(e.target.value)
@@ -51,9 +52,9 @@ const EditTracker = () => {
     function saveDataTracker() {
         console.log('!!!', name, quantity, color, message)
         if (name && quantity) {
-            dispatch(trackerAdded(name, quantity, color, message))
+            dispatch(trackerAdded(name, quantity, color, message, checked))
 
-            console.log('trackerAdded', trackerAdded(name, quantity, color, message))
+            console.log('trackerAdded', trackerAdded(name, quantity, color, message, checked))
         }
 
     }
