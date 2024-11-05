@@ -50,13 +50,12 @@ const EditTracker = () => {
 
 
     function saveDataTracker() {
-        console.log('!!!', name, quantity, color, message)
         if (name && quantity) {
             dispatch(trackerAdded(name, quantity, color, message, checked))
 
-            console.log('trackerAdded', trackerAdded(name, quantity, color, message, checked))
         }
-
+        setName('')
+        setQuantity(0)
     }
 
     return (
@@ -74,15 +73,19 @@ const EditTracker = () => {
                 <div className={stylesEdit.container__input}>
                     <p className={stylesEdit.title__input}>Навание:</p>
                     <InputStyle
+                        value={name}
                         size='size__big'
                         type='text'
                         onChange={onNameChange}
+                        placeholder='Введите название'
+                        maxlength='17'
                     />
                 </div>
 
                 <div className={stylesEdit.container__input}>
                     <p className={stylesEdit.title__input}>Количество в неделю:</p>
                     <InputStyle
+                        value={quantity}
                         size='size__big'
                         type='number'
                         onChange={onQuantityChange}

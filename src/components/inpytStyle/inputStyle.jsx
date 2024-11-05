@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './InputStyle.module.css'
 
-const InputStyle = ({value, type, onChange, onClick, size, placeholder}) => {
+const InputStyle = ({value, type, onChange, onClick, size, placeholder, maxlength}) => {
     return (
         <div>
             <input className={`${styles.input} ${styles[size]}`}
@@ -10,6 +10,7 @@ const InputStyle = ({value, type, onChange, onClick, size, placeholder}) => {
                    onChange={onChange}
                    onClick={onClick}
                    placeholder={placeholder}
+                   maxLength={maxlength}
             />
         </div>
     );

@@ -133,6 +133,10 @@
     box-shadow: 0 0 8px #3D1B62;
 }
 
+.gradient__border:active {
+    box-shadow: inset 0 0 8px #3D1B62;
+}
+
 .container__buttons {
     width: 500px;
     display: flex;

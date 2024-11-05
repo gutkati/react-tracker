@@ -18,8 +18,8 @@ const TrackerList = () => {
     const trackers = useSelector(selectAllTrackers)
     const dispatch = useDispatch()
 
+    // изменяем состояние checked у трекера
     const onCheckedChange = (id) => {
-
         trackers.map(tracker => {
 
             if (tracker.id === id) {
