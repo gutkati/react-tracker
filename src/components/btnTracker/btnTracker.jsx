@@ -5,6 +5,18 @@ import InputStyle from "../inpytStyle/inputStyle";
 const BtnTracker = ({name, quantity, color, message}) => {
 
     const [modalShow, setModalShow] = useState(false)
+    let date = new Date
+    const dayWeek = date.getDay()
+    let endWeek = showDayWeek(dayWeek)
+
+    // с пятницы считает сколько осталось до конца недели
+    function showDayWeek(dayWeek) {
+        if (dayWeek > 4) {
+            return 7 - dayWeek
+        } else if (dayWeek === 0) {
+            return 0
+        }
+    }
 
     function openModal() {
         setModalShow(true)
@@ -13,6 +25,7 @@ const BtnTracker = ({name, quantity, color, message}) => {
     function closeModal() {
         setModalShow(false)
     }
+
 
     return (
         <div className={styles.container}>
@@ -26,15 +39,29 @@ const BtnTracker = ({name, quantity, color, message}) => {
                         <button className={styles.arrow__modal} onClick={openModal}/>
                 }
 
-                <div className={styles.mark}>
-                    <p>2</p>
-                </div>
+                {
+                    message
+                        ?
+                        <div className={styles.mark}>
+                            <p>2</p>
+                        </div>
+                        :
+                        ''
+                }
+
             </div>
             {
                 modalShow
                     ?
                     <div className={styles.modal} style={{backgroundColor: color}}>
-                        <p><span>2 дня </span>до конца недели</p>
+                        {
+                            dayWeek > 4 || dayWeek === 0
+                                ?
+                                <p>Осталось дней: <span>{endWeek}</span></p>
+                                :
+                                ''
+                        }
+
                         <p>Запланировано: <span>{quantity}</span></p>
                         <p>Выполнено: <span>4</span></p>
                         <InputStyle type='button' value='Настройки'/>

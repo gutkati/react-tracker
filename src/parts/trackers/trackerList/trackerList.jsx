@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Logo from "../../../components/logo/logo";
 import Title from "../../../components/title/title";
 import InputStyle from "../../../components/inpytStyle/inputStyle";
@@ -8,9 +8,18 @@ import Footer from "../../../components/footer/footer";
 import {gradientColorMini} from "../../../arrays/arrays";
 import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectAllTrackers} from "../trackersSlice";
+import BtnTracker from "../../../components/btnTracker/btnTracker";
+import Checkbox from "../../../components/checkbox/checkbox";
 
 const TrackerList = () => {
 
+    const trackers = useSelector(selectAllTrackers)
+
+    const [checked, setChecked] = useState(true)
+
+    const onCheckedChange = () => setChecked(!checked)
 
     return (
         <div className={stylesList.trackerList}>
@@ -29,7 +38,23 @@ const TrackerList = () => {
                 <h2 className={stylesList.title}>Выбери трекер и настрой!</h2>
             </div>
 
-            <div className={stylesList.container__list}></div>
+            <div className={stylesList.container__list}>
+                {trackers.map((tracker) => (
+                    <div className={stylesList.container__trackers}>
+                        <BtnTracker
+                            name={tracker.name}
+                            quantity={tracker.quantity}
+                            color={tracker.color}
+                            message={tracker.message}
+                        />
+                        <Checkbox
+                            info='showInfo'
+                            checked={checked}
+                            onChecked={onCheckedChange}
+                        />
+                    </div>
+                ))}
+            </div>
 
             <NavLink to='/'>
                 <ButtonUnderline text='на главную'/>

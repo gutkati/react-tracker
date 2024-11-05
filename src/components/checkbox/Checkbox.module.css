@@ -19,7 +19,7 @@
   background: rgba(215, 215, 215, 0.25);
   position: relative;
   transition: background-color 0.3s;
-  border-radius: 3px;
+  /*border-radius: 3px;*/
 }
 
 /* Иконка галочки */
