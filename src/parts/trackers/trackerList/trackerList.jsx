@@ -7,16 +7,21 @@ import stylesList from './TrackerList.module.css'
 import Footer from "../../../components/footer/footer";
 import {gradientColorMini} from "../../../arrays/arrays";
 import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {selectAllTrackers, trackerChecked} from "../trackersSlice";
+import {selectAllTrackers, selectTrackerId, trackerChecked} from "../trackersSlice";
 import BtnTracker from "../../../components/btnTracker/btnTracker";
 import Checkbox from "../../../components/checkbox/checkbox";
 
 const TrackerList = () => {
 
+    let params = useParams()
+    const {trackerId} = params
+    const tracker = useSelector(state => selectTrackerId(state, trackerId))
+
     const trackers = useSelector(selectAllTrackers)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // изменяем состояние checked у трекера
     const onCheckedChange = (id) => {
@@ -34,6 +39,10 @@ const TrackerList = () => {
         })
     }
 
+    function navigateSettings(trackerId) {
+        navigate(`/editTracker/${trackerId}`)
+    }
+
 
     return (
         <div className={stylesList.trackerList}>
@@ -43,7 +52,7 @@ const TrackerList = () => {
                 </NavLink>
 
                 <Title text='Универсальный трекер дел'/>
-                <NavLink to='/editTracker' className={styles.box__buttons}>
+                <NavLink to='/createTracer' className={styles.box__buttons}>
                     <InputStyle value='Добавить' type='button' size='size__small'/>
                 </NavLink>
             </header>
@@ -62,6 +71,8 @@ const TrackerList = () => {
                             quantity={tracker.quantity}
                             color={tracker.color}
                             message={tracker.message}
+                            to={`/editTracker/${tracker.id}`}
+                            onClick={() => navigateSettings(tracker.id)}
                         />
                         <Checkbox
                             info='showInfo'

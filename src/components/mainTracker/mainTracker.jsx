@@ -3,7 +3,7 @@ import styles from './MainTracker.module.css'
 import InfoBox from "../infoBox/infoBox";
 import InputStyle from "../inpytStyle/inputStyle";
 import Day from "../day/day";
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
 import ButtonUnderline from "../buttonUnderline/buttonUnderline";
@@ -50,6 +50,7 @@ const MainTracker = () => {
                         quantity={tracker.quantity}
                         color={tracker.color}
                         message={tracker.message}
+                        to={`/editTracker/${tracker.id}`}
                     />))
                 :
                 <InfoBox/>

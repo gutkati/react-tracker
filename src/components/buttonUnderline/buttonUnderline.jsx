@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './ButtonUnderline.module.css'
 
-const ButtonUnderline = ({text}) => {
+const ButtonUnderline = ({text, onHandleClick}) => {
     return (
 
-            <button className={styles.btn}>{text}</button>
+            <button onClick={onHandleClick} className={styles.btn}>{text}</button>
 
     );
 };

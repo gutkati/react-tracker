@@ -38,19 +38,48 @@ const trackersSlice = createSlice({
                 }
             }
         },
-         trackerChecked(state, action) {
+        trackerChecked(state, action) {
             const {id, checked} = action.payload
             const desiredTracker = state.trackers.find(tracker => tracker.id === id)
 
             if (desiredTracker) {
                 desiredTracker.checked = checked
             }
+        },
+        trackerEdit(state, action) {
+            const {id, name, quantity, color, message, checked} = action.payload
+            const desiredTracker = state.trackers.find(tracker => tracker.id === id)
+
+            if (desiredTracker) {
+                desiredTracker.name = name
+                desiredTracker.quantity = quantity
+                desiredTracker.color = color
+                desiredTracker.message = message
+                desiredTracker.checked = checked
+            }
+        },
+        trackerRemove: {
+            reducer(state, action) {
+                const {id} = action.payload
+
+                const updateTrackers = state.trackers.filter(tracker => {
+                    console.log('!!!!!', tracker.id)
+                    console.log('&&&&', id)
+                    tracker.id !== id
+                    return updateTrackers
+                })
+                return state.trackers
+            }
         }
     }
 })
 
-export const {trackerAdded, trackerChecked} = trackersSlice.actions
+export const {trackerAdded, trackerChecked, trackerEdit, trackerRemove} = trackersSlice.actions
 
 export default trackersSlice.reducer
 
 export const selectAllTrackers = (state) => state.trackers.trackers
+
+export const selectTrackerId = (state, trackerId) =>
+    state.trackers.trackers.find(tracker => tracker.id === trackerId)
+

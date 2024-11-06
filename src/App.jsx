@@ -3,6 +3,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./root";
 import TrackerList from "./parts/trackers/trackerList/trackerList";
 import EditTracker from "./parts/trackers/editTrcaker/editTracker";
+import CreateTracker from "./parts/trackers/createTracker/createTracker";
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,12 @@ const router = createBrowserRouter([
     },
 
     {
-        path: '/editTracker',
+        path: '/createTracer',
+        element: <CreateTracker/>
+    },
+
+    {
+        path: '/editTracker/:trackerId',
         element: <EditTracker/>
     }
 

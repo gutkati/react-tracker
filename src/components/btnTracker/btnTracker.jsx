@@ -1,8 +1,17 @@
 import React, {useState} from 'react';
 import styles from './BtnTracker.module.css'
 import InputStyle from "../inpytStyle/inputStyle";
+import {Link, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectTrackerId} from "../../parts/trackers/trackersSlice";
 
-const BtnTracker = ({name, quantity, color, message}) => {
+const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
+
+    let params = useParams()
+    const {trackerId} = params
+    const tracker = useSelector(state => selectTrackerId(state, trackerId))
+
+    console.log()
 
     const [modalShow, setModalShow] = useState(false)
     let date = new Date
@@ -30,7 +39,7 @@ const BtnTracker = ({name, quantity, color, message}) => {
     return (
         <div className={styles.container}>
             <div className={styles.btn__tracker} style={{backgroundColor: color}}>
-                <p className={styles.mark__calendar}>{name}</p>
+                <p className={styles.mark__calendar} onClick={() => onClick(trackerId)}>{name}</p>
                 {
                     modalShow
                         ?
@@ -64,7 +73,7 @@ const BtnTracker = ({name, quantity, color, message}) => {
 
                         <p>Запланировано: <span>{quantity}</span></p>
                         <p>Выполнено: <span>4</span></p>
-                        <InputStyle type='button' value='Настройки'/>
+                        <Link to={to}><InputStyle type='button' value='Настройки'/></Link>
                     </div>
                     :
                     ''

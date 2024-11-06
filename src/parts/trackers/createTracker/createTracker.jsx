@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Logo from "../../../components/logo/logo";
 import Title from "../../../components/title/title";
-import stylesEdit from './EditTracker.module.css'
+import stylesEdit from '../../trackers/editTrcaker/EditTracker.module.css'
 import InputStyle from "../../../components/inpytStyle/inputStyle";
 import Checkbox from "../../../components/checkbox/checkbox";
 import Footer from "../../../components/footer/footer";
@@ -9,27 +9,20 @@ import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline
 import {colors} from "../../../arrays/arrays";
 import {NavLink, useParams, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {trackerEdit, selectTrackerId, trackerRemove} from "../trackersSlice";
+import {selectAllTrackers, trackerAdded} from "../trackersSlice";
 
-const EditTracker = () => {
 
-    const navigate = useNavigate()
-    let params = useParams()
-    const {trackerId} = params
-
+const CreateTracker = () => {
     const dispatch = useDispatch()
 
-    const tracker = useSelector(state => selectTrackerId(state, trackerId))
-    console.log('params', tracker.id)
-
-    const [arrTrackers, setArrTrackers] = useState([])
+    const [arrTracker, setArrTracker] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const [name, setName] = useState(tracker.name)
-    const [quantity, setQuantity] = useState(tracker.quantity)
-    const [color, setColor] = useState(tracker.color)
-    const [message, setMessage] = useState(tracker.message)
-    const [checked, setChecked] = useState(tracker.checked)
+    const [name, setName] = useState('')
+    const [quantity, setQuantity] = useState(0)
+    const [color, setColor] = useState('#0AB0E0')
+    const [message, setMessage] = useState(true)
+    const [checked, setChecked] = useState(true)
 
     const onNameChange = (e) => setName(e.target.value)
     const onQuantityChange = (e) => setQuantity(e.target.value)
@@ -58,16 +51,12 @@ const EditTracker = () => {
 
     function saveDataTracker() {
         if (name && quantity) {
-            dispatch(trackerEdit({
-                    id: tracker.id, name, quantity, color, message, checked
-                }
-            ))
-            navigate('/trackers')
-        }
-    }
+            dispatch(trackerAdded(name, quantity, color, message, checked))
+             navigate(`/editTracker/${trackerId}`)
 
-    function removeTracker() {
-        dispatch(trackerRemove(tracker.id))
+        }
+        setName('')
+        setQuantity(0)
     }
 
     return (
@@ -77,7 +66,7 @@ const EditTracker = () => {
                     <Logo/>
                 </NavLink>
                 <div className={stylesEdit.container__title}>
-                    <Title text='Настройки'/>
+                    <Title text='Новый трекер'/>
                 </div>
             </header>
 
@@ -135,7 +124,6 @@ const EditTracker = () => {
                 <NavLink to='/'>
                     <ButtonUnderline text='на главную'/>
                 </NavLink>
-                <ButtonUnderline text='удалить трекер' onHandleClick={removeTracker}/>
             </div>
             {
                 isModalOpen ?
@@ -160,4 +148,4 @@ const EditTracker = () => {
     );
 };
 
-export default EditTracker;
+export default CreateTracker;
