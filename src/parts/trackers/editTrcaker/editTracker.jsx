@@ -20,7 +20,6 @@ const EditTracker = () => {
     const dispatch = useDispatch()
 
     const tracker = useSelector(state => selectTrackerId(state, trackerId))
-    console.log('params', tracker.id)
 
     const [arrTrackers, setArrTrackers] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -67,7 +66,8 @@ const EditTracker = () => {
     }
 
     function removeTracker() {
-        dispatch(trackerRemove(tracker.id))
+        dispatch(trackerRemove({ id: tracker.id }))
+        navigate('/trackers')
     }
 
     return (
@@ -153,7 +153,6 @@ const EditTracker = () => {
                     </div>
                     : ''
             }
-
 
             <Footer/>
         </div>

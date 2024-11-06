@@ -9,7 +9,6 @@ const arrTrackers = [
         message: true,
         checked: true,
     },
-
 ]
 
 const initialState = {
@@ -61,14 +60,7 @@ const trackersSlice = createSlice({
         trackerRemove: {
             reducer(state, action) {
                 const {id} = action.payload
-
-                const updateTrackers = state.trackers.filter(tracker => {
-                    console.log('!!!!!', tracker.id)
-                    console.log('&&&&', id)
-                    tracker.id !== id
-                    return updateTrackers
-                })
-                return state.trackers
+                state.trackers = state.trackers.filter(tracker => tracker.id !== id)
             }
         }
     }
