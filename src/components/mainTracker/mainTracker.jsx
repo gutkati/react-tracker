@@ -11,9 +11,14 @@ import BtnTracker from "../btnTracker/btnTracker";
 
 const MainTracker = () => {
 
-    let arrShowDays = getDaysRange()
+    const [arrShowDays, setArrShowDays] = useState(getDaysRange())
     const trackers = useSelector(selectAllTrackers)
+
     //const trackers = useSelector(state => state.trackers.trackers)
+
+    function showMarkTracker(id) {
+
+    }
 
     // Функция для получения списка дней
     function getDaysRange() {
@@ -38,46 +43,75 @@ const MainTracker = () => {
         return days
     }
 
+    // карусель календаря назад на 3 дня
+    function showPrevDays() {
+        let firstDayArr = arrShowDays[0] // первый день массива
+
+        for (let i = 1; i < 4; i++) {
+            const newDay = new Date(firstDayArr)
+            newDay.setDate(firstDayArr.getDate() - i)
+            arrShowDays.unshift(newDay)
+        }
+
+        let arrPrevDays = arrShowDays.slice(0, 14)
+        setArrShowDays(arrPrevDays)
+    }
+
+    // карусель календаря вперед на 3 дня
+    function showNextDays() {
+        let lastDayArr = arrShowDays[arrShowDays.length - 1] // последний день массива
+
+        for (let i = 1; i < 4; i++) {
+            const newDay = new Date(lastDayArr)
+            newDay.setDate(lastDayArr.getDate() + i)
+            arrShowDays.push(newDay)
+        }
+
+        let arrPrevDays = arrShowDays.slice(-14)
+        setArrShowDays(arrPrevDays)
+    }
+
     return (
         <div className={styles.main}>
             <div className={styles.container__trackers}>
                 {trackers.length
-                ?
-                trackers.map((tracker) => (
-                    tracker.checked &&
-                    <BtnTracker
-                        name={tracker.name}
-                        quantity={tracker.quantity}
-                        color={tracker.color}
-                        message={tracker.message}
-                        to={`/editTracker/${tracker.id}`}
-                    />))
-                :
-                <InfoBox/>
-            }
+                    ?
+                    trackers.map((tracker) => (
+                        tracker.checked &&
+                        <BtnTracker
+                            key={tracker.id}
+                            name={tracker.name}
+                            quantity={tracker.quantity}
+                            color={tracker.color}
+                            message={tracker.message}
+                            to={`/editTracker/${tracker.id}`}
+                            onClick={() => showMarkTracker(tracker.id)}
+                        />))
+                    :
+                    <InfoBox/>
+                }
             </div>
 
             <div className={styles.container__main}>
                 <div className={styles.container__marks}>
-                    <button className={styles.prev}/>
+                    <button className={styles.prev} onClick={showPrevDays}/>
+                    <div className={styles.container__calendar}>
+                        {arrShowDays.map((date, index) => (
+                            <Day
+                                key={index}
+                                index={index}
+                                date={date}
+                            />
+                        ))}
 
-                    <div className={styles.marks}></div>
+                    </div>
+                    {/*<div className={styles.marks}></div>*/}
 
-                    <button className={styles.next}/>
+                    <button className={styles.next} onClick={showNextDays}/>
                 </div>
 
-                <div className={styles.border}></div>
+                {/*<div className={styles.border}></div>*/}
 
-                <div className={styles.container__calendar}>
-                    {arrShowDays.map((date, index) => (
-                        <Day
-                            key={index}
-                            index={index}
-                            date={date}
-                        />
-                    ))}
-
-                </div>
 
                 <div className={styles.container__filter}>
                     <p className={styles.filter__text}>Оставить нужные трекеры</p>

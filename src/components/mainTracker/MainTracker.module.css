@@ -23,11 +23,10 @@
 }
 
 .container__marks {
-    min-height: 80px;
+    min-height: 220px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 }
 
 .style__btn {
@@ -71,10 +70,12 @@
 }
 
 .container__calendar {
-    margin: 20px;
+    margin: 20px 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
+    flex: 1;
 }
 
 

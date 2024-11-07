@@ -83,7 +83,7 @@ const EditTracker = () => {
 
             <form className={stylesEdit.edit__form}>
                 <div className={stylesEdit.container__input}>
-                    <p className={stylesEdit.title__input}>Навание:</p>
+                    <p className={stylesEdit.title__input}>Название:</p>
                     <InputStyle
                         value={name}
                         size='size__big'
