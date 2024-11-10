@@ -1,24 +1,80 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './MainTracker.module.css'
 import InfoBox from "../infoBox/infoBox";
 import InputStyle from "../inpytStyle/inputStyle";
 import Day from "../day/day";
 import {NavLink, Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
 import ButtonUnderline from "../buttonUnderline/buttonUnderline";
 import BtnTracker from "../btnTracker/btnTracker";
+import {selectAllDays, selectDayDate, daysAdded, trackerDaysAdded} from "../../parts/days/daysSlice";
 
 const MainTracker = () => {
 
     const [arrShowDays, setArrShowDays] = useState(getDaysRange())
     const trackers = useSelector(selectAllTrackers)
+    const days = useSelector(selectAllDays)
 
-    //const trackers = useSelector(state => state.trackers.trackers)
+    const [markShow, setMarkShow] = useState([])
 
-    function showMarkTracker(id) {
+
+    // const trackers = useSelector(state => state.trackers.trackers)
+
+    const dispatch = useDispatch()
+
+    function saveMarkTracker(id, name, color) {
+        // преобразуем дату в формат YYYY-MM-DD
+        let nowDate = new Date().toISOString().split('T')[0]
+        console.log('data', id, nowDate, name, color)
+
+        // проверяем сегодняшнююдату с датой в массиве дней
+        let existingTracker = days.find(day => day.date === nowDate)
+
+        // Проверяем, существует ли трекер с данным `id` внутри найденного дня
+        const checkTracker = existingTracker
+            ? existingTracker.arrTracker.some(tracker => tracker.id === id)
+            : false;
+
+        // Если даты нет в массиве дней, добавляем новый день с трекером
+        if (!existingTracker) {
+            dispatch(daysAdded(id, nowDate, name, color))
+        }
+        // Если день существует, но трекер в нем еще не добавлен, добавляем трекер
+        else if (existingTracker && !checkTracker) {
+            dispatch(trackerDaysAdded(id, nowDate, name, color))
+        }
+        let markShow = existingTracker.arrTracker.map(tracker => {
+            return <div key={tracker.id} style={{backgroundColor: tracker.color}} className={styles.mark__circle}/>
+        })
+
+        setMarkShow(markShow)
 
     }
+
+    // markShow: useEffect срабатывает при каждом изменении days и обновляет markShow для отображения выполненных трекеров.
+    // useEffect ожидает, пока Redux обновит days, и только потом обновляет отображение маркеров.
+
+    useEffect(() => {
+        let nowDate = new Date().toISOString().split('T')[0]
+        let todayTracker = days.find(day => day.date === nowDate) // по дате находим нужный день
+
+        console.log('todayTracker', todayTracker)
+
+        if (todayTracker) {
+            const updatedMarks = todayTracker.arrTracker.map(tracker => (
+                <div
+                    key={tracker.id}
+                    style={{ backgroundColor: tracker.color }}
+                    className={styles.mark__circle}
+                />
+            ));
+            setMarkShow(updatedMarks);
+        }
+
+    },[days])
+
+
 
     // Функция для получения списка дней
     function getDaysRange() {
@@ -85,7 +141,7 @@ const MainTracker = () => {
                             color={tracker.color}
                             message={tracker.message}
                             to={`/editTracker/${tracker.id}`}
-                            onClick={() => showMarkTracker(tracker.id)}
+                            onClick={() => saveMarkTracker(tracker.id, tracker.name, tracker.color)}
                         />))
                     :
                     <InfoBox/>
@@ -101,6 +157,7 @@ const MainTracker = () => {
                                 key={index}
                                 index={index}
                                 date={date}
+                                markShow={markShow}
                             />
                         ))}
 

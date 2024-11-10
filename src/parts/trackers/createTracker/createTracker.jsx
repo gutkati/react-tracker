@@ -52,7 +52,7 @@ const CreateTracker = () => {
     function saveDataTracker() {
         if (name && quantity) {
             dispatch(trackerAdded(name, quantity, color, message, checked))
-             navigate(`/editTracker/${trackerId}`)
+             //navigate(`/editTracker/${trackerId}`)
 
         }
         setName('')

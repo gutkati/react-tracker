@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./Day.module.css";
 import {gradientColor, arrMonths, days} from '../../arrays/arrays'
 
-const Day = ({index, date}) => {
+const Day = ({index, date, markShow}) => {
 
     let gradient = gradientColor[index]
     const currentDate = new Date()
@@ -19,6 +19,7 @@ const Day = ({index, date}) => {
     // Чтобы сравнить две даты, лучше использовать toDateString(), это позволит сравнить только день, месяц и год
     return (
         <div className={styles.box__day}>
+            {currentDate.toDateString() === date.toDateString() ? markShow : ''}
             <div
                 className={`${styles.square} ${currentDate.toDateString() === date.toDateString() ? styles.mark__square : ''}`}>
                 <p>{day}</p>

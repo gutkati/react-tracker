@@ -22,7 +22,7 @@ const trackersSlice = createSlice({
         trackerAdded: {
             reducer(state, action) { // обновлять стейт
                 state.trackers.push(action.payload)
-                console.log('initialState', state.trackers)
+                console.log('initialState', action.payload)
             },
             prepare(name, quantity, color, message, checked) { // возвращать объект payload со сгенерированным id и другими нашими данными:
                 return {

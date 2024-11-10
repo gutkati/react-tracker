@@ -11,8 +11,6 @@ const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
     const {trackerId} = params
     const tracker = useSelector(state => selectTrackerId(state, trackerId))
 
-    console.log()
-
     const [modalShow, setModalShow] = useState(false)
     let date = new Date
     const dayWeek = date.getDay()
@@ -39,7 +37,10 @@ const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
     return (
         <div className={styles.container}>
             <div className={styles.btn__tracker} style={{backgroundColor: color}}>
-                <p className={styles.mark__calendar} onClick={() => onClick(trackerId)}>{name}</p>
+                <p className={styles.mark__calendar}
+                   onClick={() => onClick(trackerId, name, color)}>
+                    {name}
+                </p>
                 {
                     modalShow
                         ?

@@ -24,23 +24,56 @@ const daysSlice = createSlice({
         daysAdded: {
             reducer(state, action) {
                 state.days.push(action.payload)
+                console.log('action', action.payload)
+            },
+            prepare(id, nowDate, name, color) { // возвращать объект payload с данными:
+                return {
+                    payload: {
+                        date: nowDate,
+                        arrTracker: [
+                            {
+                                id,
+                                name,
+                                color,
+                            }
+                        ]
+                    }
+                }
             }
         },
-        prepare(id, date, name, color) { // возвращать объект payload с данными:
-            return {
-                payload: {
-                    id,
-                    date,
-                    name,
-                    color,
+
+        trackerDaysAdded: {
+            reducer(state, action) {
+                const {id, name, color, nowDate} = action.payload
+                console.log('action', action.payload)
+
+                const day = state.days.find(day => day.date === nowDate)
+
+                if (day) {
+                    day.arrTracker.push({id, name, color});
+                }
+
+            },
+            prepare(id, nowDate, name, color) { // возвращать объект payload с данными:
+                return {
+                    payload: {
+                        id,
+                        nowDate,
+                        name,
+                        color,
+                    }
                 }
             }
         }
     }
+
 })
 
-export const {daysAdded} = daysSlice.actions
+export const {daysAdded, trackerDaysAdded} = daysSlice.actions
+
+export default daysSlice.reducer
 
 export const selectAllDays = (state) => state.days.days
 
-export default daysSlice.reducer
+export const selectDayDate = (state, date) =>
+    state.trackers.trackers.find(tracker => tracker.date === date)

@@ -94,7 +94,7 @@ const TrackerList = () => {
                     ))}
                 </div>
 
-                <div className={stylesList.border}/>
+                {/*<div className={stylesList.border}/>*/}
 
             </div>
 
