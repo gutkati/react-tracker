@@ -27,7 +27,7 @@ export const gradientColorMini = [
 
 export const arrMonths = ['янв', 'февр', 'март', 'апр', 'май', 'июнь', 'июль', 'авг', 'сент', 'окт', 'нояб', 'дек',]
 
-export let days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+export let arrDays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
 
 export const colors = [
     '#E16A77',

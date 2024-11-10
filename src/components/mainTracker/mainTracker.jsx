@@ -16,7 +16,7 @@ const MainTracker = () => {
     const trackers = useSelector(selectAllTrackers)
     const days = useSelector(selectAllDays)
 
-    const [markShow, setMarkShow] = useState([])
+    // const [markShow, setMarkShow] = useState([])
 
 
     // const trackers = useSelector(state => state.trackers.trackers)
@@ -44,37 +44,7 @@ const MainTracker = () => {
         else if (existingTracker && !checkTracker) {
             dispatch(trackerDaysAdded(id, nowDate, name, color))
         }
-        let markShow = existingTracker.arrTracker.map(tracker => {
-            return <div key={tracker.id} style={{backgroundColor: tracker.color}} className={styles.mark__circle}/>
-        })
-
-        setMarkShow(markShow)
-
     }
-
-    // markShow: useEffect срабатывает при каждом изменении days и обновляет markShow для отображения выполненных трекеров.
-    // useEffect ожидает, пока Redux обновит days, и только потом обновляет отображение маркеров.
-
-    useEffect(() => {
-        let nowDate = new Date().toISOString().split('T')[0]
-        let todayTracker = days.find(day => day.date === nowDate) // по дате находим нужный день
-
-        console.log('todayTracker', todayTracker)
-
-        if (todayTracker) {
-            const updatedMarks = todayTracker.arrTracker.map(tracker => (
-                <div
-                    key={tracker.id}
-                    style={{ backgroundColor: tracker.color }}
-                    className={styles.mark__circle}
-                />
-            ));
-            setMarkShow(updatedMarks);
-        }
-
-    },[days])
-
-
 
     // Функция для получения списка дней
     function getDaysRange() {
@@ -157,7 +127,6 @@ const MainTracker = () => {
                                 key={index}
                                 index={index}
                                 date={date}
-                                markShow={markShow}
                             />
                         ))}
 

@@ -64,12 +64,27 @@ const daysSlice = createSlice({
                     }
                 }
             }
+        },
+
+        markRemove: {
+            reducer(state, action) {
+                const {id, nowDate} = action.payload
+
+                console.log('$$$', action.payload)
+                // state.days = state.days.filter(tracker => tracker.id !== id)
+
+                const day = state.days.find(day => day.date === nowDate)
+
+                if (day) {
+                    day.arrTracker = day.arrTracker.filter(mark => mark.id !== id);
+                }
+            }
         }
     }
 
 })
 
-export const {daysAdded, trackerDaysAdded} = daysSlice.actions
+export const {daysAdded, trackerDaysAdded, markRemove} = daysSlice.actions
 
 export default daysSlice.reducer
 
