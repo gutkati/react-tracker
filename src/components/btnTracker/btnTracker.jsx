@@ -4,19 +4,75 @@ import InputStyle from "../inpytStyle/inputStyle";
 import {Link, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectTrackerId} from "../../parts/trackers/trackersSlice";
+import {selectAllDays} from "../../parts/days/daysSlice";
 
-const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
+const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
     let params = useParams()
     const {trackerId} = params
     const tracker = useSelector(state => selectTrackerId(state, trackerId))
+    const days = useSelector(selectAllDays)
 
     const [modalShow, setModalShow] = useState(false)
     let date = new Date
-    const dayWeek = date.getDay()
+    // const dayWeek = date.getDay()
+    const dayWeek = 5
     let endWeek = showDayWeek(dayWeek)
 
-    // с пятницы считает сколько осталось до конца недели
+    // получить массив текущей недели
+    function getCurrentWeek() {
+        const today = new Date();
+        const dayOfWeek = today.getDay();
+        const startOfCurrentWeek = new Date(today);
+
+        // Определяем начало текущей недели (понедельник)
+        startOfCurrentWeek.setDate(today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1))
+        let startDayWeek = startOfCurrentWeek
+
+        const daysWeek = []
+        for (let i = 0; i < 7; i++) {
+            const day = new Date(startOfCurrentWeek)
+            day.setDate(startOfCurrentWeek.getDate() + i)
+            daysWeek.push(day.toISOString().split('T')[0]) // преобразовать в дату YYY-MM-DD
+        }
+
+        return daysWeek
+    }
+
+    // получить количество выполненых трекеров
+    function getNumMarkWeek() {
+        let daysWeek = getCurrentWeek()
+        let numTracker = 0
+
+        daysWeek.map(date => {
+            days.find(day => {
+                if (date === day.date) {
+                    day.arrTracker.find(mark => {
+                        if (mark.id === id) {
+                            numTracker += 1
+                        }
+                    })
+                }
+            })
+        })
+
+        return numTracker
+    }
+
+    const checkTracker = getNumMarkWeek()
+
+    // посчитать остаток невыполненых трекеров
+    // function calcExecuteMark() {
+    //     return quantity - checkTracker
+    // }
+
+    const remainder = quantity - checkTracker
+
+
+    console.log('numTracker', getNumMarkWeek())
+
+
+// с пятницы считает сколько осталось до конца недели
     function showDayWeek(dayWeek) {
         if (dayWeek > 4) {
             return 7 - dayWeek
@@ -32,7 +88,6 @@ const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
     function closeModal() {
         setModalShow(false)
     }
-
 
     return (
         <div className={styles.container}>
@@ -50,10 +105,10 @@ const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
                 }
 
                 {
-                    message
+                    message && (dayWeek > 4 || dayWeek === 0 ) && (remainder !== 0)
                         ?
                         <div className={styles.mark}>
-                            <p>2</p>
+                            <p>{remainder}</p>
                         </div>
                         :
                         ''
@@ -73,7 +128,7 @@ const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
                         }
 
                         <p>Запланировано: <span>{quantity}</span></p>
-                        <p>Выполнено: <span>4</span></p>
+                        <p>Выполнено: <span>{checkTracker}</span></p>
                         <Link to={to}><InputStyle type='button' value='Настройки'/></Link>
                     </div>
                     :
@@ -81,8 +136,8 @@ const BtnTracker = ({name, quantity, color, message, to, onClick}) => {
             }
 
         </div>
+    )
+}
 
-    );
-};
 
 export default BtnTracker;

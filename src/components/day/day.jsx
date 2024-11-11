@@ -49,7 +49,6 @@ const Day = ({index, date}) => {
                     className={styles.mark__circle}
                     data-tooltip={tracker.name} // Используем `data-tooltip` атрибут
                     onClick={() => removeMarkTracker(tracker.id)}
-
                 />
             ));
             setMarkShow(updatedMarks);

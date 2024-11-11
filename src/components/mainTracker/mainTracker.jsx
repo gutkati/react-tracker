@@ -3,12 +3,11 @@ import styles from './MainTracker.module.css'
 import InfoBox from "../infoBox/infoBox";
 import InputStyle from "../inpytStyle/inputStyle";
 import Day from "../day/day";
-import {NavLink, Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
-import ButtonUnderline from "../buttonUnderline/buttonUnderline";
 import BtnTracker from "../btnTracker/btnTracker";
-import {selectAllDays, selectDayDate, daysAdded, trackerDaysAdded} from "../../parts/days/daysSlice";
+import {selectAllDays, daysAdded, trackerDaysAdded} from "../../parts/days/daysSlice";
 
 const MainTracker = () => {
 
@@ -16,10 +15,7 @@ const MainTracker = () => {
     const trackers = useSelector(selectAllTrackers)
     const days = useSelector(selectAllDays)
 
-    // const [markShow, setMarkShow] = useState([])
-
-
-    // const trackers = useSelector(state => state.trackers.trackers)
+    const [visibleWeek, setVisibleWeek] = useEffect()
 
     const dispatch = useDispatch()
 
@@ -28,7 +24,7 @@ const MainTracker = () => {
         let nowDate = new Date().toISOString().split('T')[0]
         console.log('data', id, nowDate, name, color)
 
-        // проверяем сегодняшнююдату с датой в массиве дней
+        // проверяем сегодняшнюю дату с датой в массиве дней
         let existingTracker = days.find(day => day.date === nowDate)
 
         // Проверяем, существует ли трекер с данным `id` внутри найденного дня
@@ -106,6 +102,7 @@ const MainTracker = () => {
                         tracker.checked &&
                         <BtnTracker
                             key={tracker.id}
+                            id={tracker.id}
                             name={tracker.name}
                             quantity={tracker.quantity}
                             color={tracker.color}

@@ -13,8 +13,19 @@ let arr = [
     }
 ]
 
+function getListDays(key, initTrackers) {
+    let data = JSON.parse(localStorage.getItem(key)) || initTrackers
+    return data
+}
+
+function saveDataLockStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data))
+}
+
+const initArrDays = getListDays('days', [])
+
 const initialState = {
-    days: [],
+    days: initArrDays,
 }
 
 const daysSlice = createSlice({
@@ -24,6 +35,7 @@ const daysSlice = createSlice({
         daysAdded: {
             reducer(state, action) {
                 state.days.push(action.payload)
+                saveDataLockStorage('days', state.days)
                 console.log('action', action.payload)
             },
             prepare(id, nowDate, name, color) { // возвращать объект payload с данными:
@@ -51,6 +63,7 @@ const daysSlice = createSlice({
 
                 if (day) {
                     day.arrTracker.push({id, name, color});
+                    saveDataLockStorage('days', state.days)
                 }
 
             },
@@ -70,13 +83,11 @@ const daysSlice = createSlice({
             reducer(state, action) {
                 const {id, nowDate} = action.payload
 
-                console.log('$$$', action.payload)
-                // state.days = state.days.filter(tracker => tracker.id !== id)
-
                 const day = state.days.find(day => day.date === nowDate)
 
                 if (day) {
                     day.arrTracker = day.arrTracker.filter(mark => mark.id !== id);
+                    saveDataLockStorage('days', state.days)
                 }
             }
         }

@@ -54,6 +54,10 @@
 
 }
 
+.mark__circle {
+    composes: mark__circle from '../mainTracker/MainTracker.module.css'
+}
+
 .next {
     composes: style__btn;
     background-image: url("../../images/next.png");

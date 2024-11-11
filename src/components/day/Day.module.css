@@ -83,7 +83,7 @@
     content: attr(data-tooltip); /* Получаем текст `tooltip` из `data-tooltip` атрибута */
     position: relative;
     bottom: 90%; /* Позиционируем `tooltip` сверху */
-    right: 180%;
+    right: 100%;
     transform: translateX(-50%);
     background-color: rgba(250, 250, 250, .1);
     color: #bfbfbf;
