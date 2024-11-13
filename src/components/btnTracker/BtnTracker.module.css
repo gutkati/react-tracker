@@ -52,8 +52,8 @@
 }
 
 .arrow__modal_close {
-    width: 20px;
-    height: 16px;
+    width: 16px;
+    height: 12px;
     background-image: url("../../images/arrow-open.svg");
     background-position: center;
     background-repeat: no-repeat;

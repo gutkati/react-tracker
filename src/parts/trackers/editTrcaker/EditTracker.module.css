@@ -27,6 +27,12 @@
     margin-right: 40px;
 }
 
+.container__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .edit__form {
     width: 500px;
     flex: 1;
@@ -48,6 +54,20 @@
     font-size: 20px;
 }
 
+.box__input {
+    display: flex;
+    flex-direction: column;
+}
+
+.position {
+    position: relative;
+}
+
+.label {
+    color: #FF243C;
+    font-size: 12px;
+}
+
 .container__color2 {
     width: 220px;
     border: 2px solid #fff;
@@ -62,14 +82,14 @@
 }
 
 .btn__circle {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
 }
 
 .btn__mark {
-    width: 20px;
-    height: 16px;
+    width: 16px;
+    height: 12px;
     background-image: url("../../../images/arrow.svg");
     background-position: center;
     background-repeat: no-repeat;
@@ -80,6 +100,26 @@
     cursor: pointer;
     transition: background-image 0.3s;
     background-image: url("../../../images/arrow-hover.svg");
+}
+
+.btn__mark_close {
+    composes: btn__mark;
+    background-image: url("../../../images/arrow-open.svg");
+}
+
+.btn__mark_close:hover {
+    cursor: pointer;
+    transition: background-image 0.3s;
+    background-image: url("../../../images/arrow-open-hover.svg");
+}
+
+.container__arrow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: absolute;
+    top: 8px;
+    right: 17px;
 }
 
 .check__display::after {
@@ -171,4 +211,18 @@
     border-radius: 50%;
     margin: 10px;
     cursor: pointer;
+}
+
+.save__tracker {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px 0 20px;
+}
+
+.show__color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin: 10px;
 }

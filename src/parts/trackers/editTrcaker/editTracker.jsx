@@ -10,6 +10,7 @@ import {colors} from "../../../arrays/arrays";
 import {NavLink, useParams, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {trackerEdit, selectTrackerId, trackerRemove} from "../trackersSlice";
+import styles from "./EditTracker.module.css";
 
 const EditTracker = () => {
 
@@ -21,7 +22,6 @@ const EditTracker = () => {
 
     const tracker = useSelector(state => selectTrackerId(state, trackerId))
 
-    const [arrTrackers, setArrTrackers] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const [name, setName] = useState(tracker.name)
@@ -30,8 +30,49 @@ const EditTracker = () => {
     const [message, setMessage] = useState(tracker.message)
     const [checked, setChecked] = useState(tracker.checked)
 
+    const [errorName, setErrorName] = useState('')
+    const [errorQuantity, setErrorQuantity] = useState('')
+
+    console.log("quantity", typeof quantity)
+
     const onNameChange = (e) => setName(e.target.value)
+
+    const handleBlurName = () => {
+        validateName(name)
+    }
+
+    function validateName(name) {
+        if (name.length === 0) {
+            setErrorName('Заполните поле')
+            return false
+        }
+        setErrorName('')
+        return true
+    }
+
     const onQuantityChange = (e) => setQuantity(e.target.value)
+
+    const handleBlurQuantity = () => {
+        validateQuantity(Number(quantity))
+    }
+
+    function validateQuantity(quantity) {
+        let num = /^\d+$/
+        if (quantity === 0 || quantity === "" || quantity === "0") {
+            setErrorQuantity('Введите количество')
+            return false
+        } else if (!num.test(quantity)) {
+            setErrorQuantity('Введите положительное число')
+            return false
+        } else if (Number(quantity) > 0) {
+            setErrorQuantity('')
+            return true
+        } else {
+            setErrorQuantity('Введите положительное число');
+            return false;
+        }
+
+    }
 
     const stopPropagation = (e) => {
         e.stopPropagation()
@@ -39,6 +80,20 @@ const EditTracker = () => {
 
     const onCheckedChange = () => {
         setMessage(!message)
+    }
+
+    function incNum() {
+        let res = Number(quantity)
+        if (res < 99) {
+            setQuantity(res + 1)
+        }
+    }
+
+    function decNum() {
+        let res = Number(quantity)
+        if (res > 1) {
+            setQuantity(res - 1)
+        }
     }
 
     function showModal() {
@@ -56,7 +111,7 @@ const EditTracker = () => {
 
 
     function saveDataTracker() {
-        if (name && quantity) {
+        if (name && quantity > 0) {
             dispatch(trackerEdit({
                     id: tracker.id, name, quantity, color, message, checked
                 }
@@ -66,7 +121,7 @@ const EditTracker = () => {
     }
 
     function removeTracker() {
-        dispatch(trackerRemove({ id: tracker.id }))
+        dispatch(trackerRemove({id: tracker.id}))
         navigate('/trackers')
     }
 
@@ -84,32 +139,69 @@ const EditTracker = () => {
             <form className={stylesEdit.edit__form}>
                 <div className={stylesEdit.container__input}>
                     <p className={stylesEdit.title__input}>Название:</p>
-                    <InputStyle
-                        value={name}
-                        size='size__big'
-                        type='text'
-                        onChange={onNameChange}
-                        placeholder='Введите название'
-                        maxlength='17'
-                    />
+                    <div className={styles.box__input}>
+                        <InputStyle
+                            value={name}
+                            size='size__big'
+                            type='text'
+                            onChange={onNameChange}
+                            placeholder='Введите название'
+                            maxlength='17'
+                            onBlur={handleBlurName}
+                        />
+                        <label className={styles.label}>{errorName}</label>
+                    </div>
                 </div>
 
                 <div className={stylesEdit.container__input}>
                     <p className={stylesEdit.title__input}>Количество в неделю:</p>
-                    <InputStyle
-                        value={quantity}
-                        size='size__big'
-                        type='number'
-                        onChange={onQuantityChange}
-                    />
+                    <div className={`${styles.box__input} ${styles.position}`}>
+                        <InputStyle
+                            value={quantity}
+                            size='size__big'
+                            type=''
+                            onChange={onQuantityChange}
+                            onBlur={handleBlurQuantity}
+                        />
+                        <div className={styles.container__arrow}>
+                            <div className={styles.btn__mark_close} onClick={incNum}/>
+
+                            <div className={styles.btn__mark} onClick={decNum}/>
+                        </div>
+                        <label className={styles.label}>{errorQuantity}</label>
+                    </div>
                 </div>
+
+
+                {/*<div className={stylesEdit.container__input} onClick={(e) => stopPropagation(e)}>*/}
+                {/*    <p className={stylesEdit.title__input}>Количество:</p>*/}
+
+                {/*    <div className={stylesEdit.container__color2}>*/}
+                {/*        <div>{quantity}</div>*/}
+
+                {/*        <div className={styles.container__arrow}>*/}
+                {/*            <div className={styles.btn__mark_close} onClick={incNum}/>*/}
+
+                {/*            <div className={styles.btn__mark} onClick={decNum}/>*/}
+                {/*        </div>*/}
+
+
+                {/*    </div>*/}
+                {/*</div>*/}
+
 
                 <div className={stylesEdit.container__input} onClick={(e) => stopPropagation(e)}>
                     <p className={stylesEdit.title__input}>Цвет кнопки:</p>
 
                     <div className={stylesEdit.container__color2}>
                         <div className={stylesEdit.btn__circle} style={{backgroundColor: color}}/>
-                        <div className={stylesEdit.btn__mark} onClick={showModal}/>
+                        {
+                            isModalOpen
+                                ?
+                                <div className={styles.btn__mark_close} onClick={closeModalColor}/>
+                                :
+                                <div className={styles.btn__mark} onClick={showModal}/>
+                        }
                     </div>
                 </div>
 

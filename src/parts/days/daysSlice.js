@@ -44,6 +44,7 @@ const daysSlice = createSlice({
                         date: nowDate,
                         arrTracker: [
                             {
+                                // idMark: nanoid(6),
                                 id,
                                 name,
                                 color,
@@ -70,6 +71,7 @@ const daysSlice = createSlice({
             prepare(id, nowDate, name, color) { // возвращать объект payload с данными:
                 return {
                     payload: {
+                        // idMark: nanoid(6),
                         id,
                         nowDate,
                         name,

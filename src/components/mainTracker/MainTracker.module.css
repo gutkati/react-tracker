@@ -54,9 +54,9 @@
 
 }
 
-.mark__circle {
-    composes: mark__circle from '../mainTracker/MainTracker.module.css'
-}
+/*.mark__circle {*/
+/*    composes: mark__circle from '../mainTracker/MainTracker.module.css'*/
+/*}*/
 
 .next {
     composes: style__btn;

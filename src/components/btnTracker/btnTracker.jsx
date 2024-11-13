@@ -15,8 +15,7 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
     const [modalShow, setModalShow] = useState(false)
     let date = new Date
-    // const dayWeek = date.getDay()
-    const dayWeek = 5
+    const dayWeek = date.getDay()
     let endWeek = showDayWeek(dayWeek)
 
     // получить массив текущей недели
@@ -27,7 +26,6 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
         // Определяем начало текущей недели (понедельник)
         startOfCurrentWeek.setDate(today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1))
-        let startDayWeek = startOfCurrentWeek
 
         const daysWeek = []
         for (let i = 0; i < 7; i++) {
@@ -59,20 +57,13 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
         return numTracker
     }
 
+    // количество выполненных трекеров
     const checkTracker = getNumMarkWeek()
 
     // посчитать остаток невыполненых трекеров
-    // function calcExecuteMark() {
-    //     return quantity - checkTracker
-    // }
-
     const remainder = quantity - checkTracker
 
-
-    console.log('numTracker', getNumMarkWeek())
-
-
-// с пятницы считает сколько осталось до конца недели
+    // с пятницы считает сколько осталось до конца недели
     function showDayWeek(dayWeek) {
         if (dayWeek > 4) {
             return 7 - dayWeek
@@ -105,7 +96,7 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
                 }
 
                 {
-                    message && (dayWeek > 4 || dayWeek === 0 ) && (remainder !== 0)
+                    message && (dayWeek > 4 || dayWeek === 0) && (remainder !== 0) && (checkTracker < quantity)
                         ?
                         <div className={styles.mark}>
                             <p>{remainder}</p>

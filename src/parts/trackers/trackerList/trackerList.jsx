@@ -67,6 +67,7 @@ const TrackerList = () => {
                          className={stylesList.container__trackers}
                     >
                         <BtnTracker
+                            id={tracker.id}
                             name={tracker.name}
                             quantity={tracker.quantity}
                             color={tracker.color}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './MainTracker.module.css'
 import InfoBox from "../infoBox/infoBox";
 import InputStyle from "../inpytStyle/inputStyle";
@@ -14,8 +14,6 @@ const MainTracker = () => {
     const [arrShowDays, setArrShowDays] = useState(getDaysRange())
     const trackers = useSelector(selectAllTrackers)
     const days = useSelector(selectAllDays)
-
-    const [visibleWeek, setVisibleWeek] = useEffect()
 
     const dispatch = useDispatch()
 
@@ -59,6 +57,7 @@ const MainTracker = () => {
         for (let i = 0; i < 14; i++) {
             const day = new Date(startOfPreviousWeek)
             day.setDate(startOfPreviousWeek.getDate() + i)
+
             days.push(day)
         }
 
@@ -128,26 +127,15 @@ const MainTracker = () => {
                         ))}
 
                     </div>
-                    {/*<div className={styles.marks}></div>*/}
 
                     <button className={styles.next} onClick={showNextDays}/>
                 </div>
-
-                {/*<div className={styles.border}></div>*/}
-
 
                 <div className={styles.container__filter}>
                     <p className={styles.filter__text}>Оставить нужные трекеры</p>
 
                     <NavLink to='/trackers' className={styles.filter}>
-
                         <InputStyle size='size__small' value='Все трекеры' type='button'/>
-
-                        {/*<select className={styles.filter__list}>*/}
-                        {/*    {listTrack.map((track, index) => (*/}
-                        {/*        <option key={index} value="">{track}</option>*/}
-                        {/*    ))}*/}
-                        {/*</select>*/}
                     </NavLink>
                 </div>
 
