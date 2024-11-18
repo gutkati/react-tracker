@@ -6,10 +6,15 @@
 }
 
 .square {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     background-color: rgba(217, 217, 217, .25);
     text-align: center;
+    border-radius: 10px;
+}
+
+.off__square {
+    background-color: rgba(217, 217, 217, .5);
 }
 
 .mark__square {
@@ -21,8 +26,8 @@
 }
 
 .circle {
-    width: 47px;
-    height: 47px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     margin: 10px 0;
     display: flex;
@@ -60,8 +65,8 @@
 }
 
 .little__circle {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: #5F2B70;
     display: flex;

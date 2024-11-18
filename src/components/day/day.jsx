@@ -14,6 +14,9 @@ const Day = ({index, date}) => {
     const num = date.getDate()
     const month = arrMonths[date.getMonth()]
     const day = arrDays[date.getDay()]
+    let dayOff = date.getDay()
+
+    console.log('day', index)
 
     const days = useSelector(selectAllDays)
 
@@ -60,7 +63,10 @@ const Day = ({index, date}) => {
             </div>
 
             <div
-                className={`${styles.square} ${currentDate.toDateString() === date.toDateString() ? styles.mark__square : ''}`}>
+                className={`${styles.square} 
+                ${currentDate.toDateString() === date.toDateString() ? styles.mark__square : ''}
+                ${dayOff === 6 || dayOff === 0 ? styles.off__square : ''}
+                `}>
                 <p>{day}</p>
             </div>
             <div className={`${styles.circle} ${styles[gradient]}`}>
