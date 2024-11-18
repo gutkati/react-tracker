@@ -115,6 +115,7 @@ const MainTracker = () => {
             </div>
 
             <div className={styles.container__main}>
+                <div className={styles.border}/>
                 <div className={styles.container__marks}>
                     <button className={styles.prev} onClick={showPrevDays}/>
                     <div className={styles.container__calendar}>
@@ -131,13 +132,13 @@ const MainTracker = () => {
                     <button className={styles.next} onClick={showNextDays}/>
                 </div>
 
-                <div className={styles.container__filter}>
-                    <p className={styles.filter__text}>Оставить нужные трекеры</p>
+                {/*<div className={styles.container__filter}>*/}
+                {/*    <p className={styles.filter__text}>Оставить нужные трекеры</p>*/}
 
-                    <NavLink to='/trackers' className={styles.filter}>
-                        <InputStyle size='size__small' value='Все трекеры' type='button'/>
-                    </NavLink>
-                </div>
+                {/*    <NavLink to='/trackers' className={styles.filter}>*/}
+                {/*        <InputStyle size='size__small' value='Все трекеры' type='button'/>*/}
+                {/*    </NavLink>*/}
+                {/*</div>*/}
 
             </div>
         </div>

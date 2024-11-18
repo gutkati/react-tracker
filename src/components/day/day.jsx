@@ -57,9 +57,15 @@ const Day = ({index, date}) => {
     // Чтобы сравнить две даты, лучше использовать toDateString(), это позволит сравнить только день, месяц и год
     return (
         <div className={styles.box__day}>
-            <div>
-                {/*{markShow}*/}
-                {marks(date)}
+
+
+            <p className={styles.month}>{month}</p>
+
+
+            <div className={`${styles.circle} ${styles[gradient]}`}>
+                <div className={styles.little__circle}>
+                    <p>{num}</p>
+                </div>
             </div>
 
             <div
@@ -69,12 +75,12 @@ const Day = ({index, date}) => {
                 `}>
                 <p>{day}</p>
             </div>
-            <div className={`${styles.circle} ${styles[gradient]}`}>
-                <div className={styles.little__circle}>
-                    <p>{num}</p>
-                </div>
+
+             <div>
+                {/*{markShow}*/}
+                {marks(date)}
             </div>
-            <p>{month}</p>
+
         </div>
     );
 };
