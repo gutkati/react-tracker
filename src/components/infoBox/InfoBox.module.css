@@ -1,7 +1,7 @@
 .info__box {
-    max-width: 230px;
+    width: 220px;
     min-height: 340px;
-    width: fit-content;
+    /*width: fit-content;*/
     height: fit-content;
     padding: 15px;
     box-sizing: border-box;

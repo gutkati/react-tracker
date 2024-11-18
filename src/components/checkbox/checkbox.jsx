@@ -16,16 +16,6 @@ const Checkbox = ({info, checked, onChecked}) => {
             />
             <span className={styles.check__mark}></span>
         </label>
-
-        // <input
-        //     className={styles.checkbox}
-        //     value={value}
-        //     type="checkbox"
-        //     name={info}
-        //     id={info}
-        //     defaultChecked={checked}
-        //     onChange={onChecked}
-        // />
     );
 };
 

@@ -58,7 +58,14 @@ const TrackerList = () => {
             </header>
 
             <div className={stylesList.subtitle}>
-                <h2 className={stylesList.title}>Выбери трекер и настрой!</h2>
+                {
+                    trackers.length
+                        ?
+                        <h2 className={stylesList.title}>Выбери трекер и настрой!</h2>
+                        :
+                        <h2 className={stylesList.title}>Создай свой трекер!</h2>
+                }
+
             </div>
 
             <div className={stylesList.container__list}>

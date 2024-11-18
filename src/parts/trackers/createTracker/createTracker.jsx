@@ -7,10 +7,9 @@ import Checkbox from "../../../components/checkbox/checkbox";
 import Footer from "../../../components/footer/footer";
 import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
 import {colors} from "../../../arrays/arrays";
-import {NavLink, useParams, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers, trackerAdded} from "../trackersSlice";
-import {selectAllDays} from "../../days/daysSlice";
 import stylesEdit from "../editTrcaker/EditTracker.module.css";
 
 
@@ -18,7 +17,6 @@ const CreateTracker = () => {
     const dispatch = useDispatch()
     const trackers = useSelector(selectAllTrackers)
 
-    const [arrTracker, setArrTracker] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const [name, setName] = useState('')
@@ -113,7 +111,7 @@ const CreateTracker = () => {
         if (name && quantity > 0) {
             dispatch(trackerAdded(name, quantity, color, message, checked))
             setName('')
-            setQuantity('0')
+            setQuantity('1')
             // setShowTracker([showTracker.push(color)])
             //navigate(`/editTracker/${trackerId}`)
 
@@ -128,20 +126,13 @@ const CreateTracker = () => {
     useEffect(() => {
         let arrTracker = []
         trackers.map(track => {
-            console.log('day', track)
             arrTracker.push(track.color)
 
         })
         setShowTracker(arrTracker)
 
-        console.log('arrTracker', arrTracker)
-        // arrTracker.map(color => {
-        //     return <div className={styles.show__color} style={{backgroundColor: color}}/>
-        // })
-
     }, [trackers])
 
-    console.log('@@@', showTracker)
 
     return (
         <div className={styles.edit__tracker} onClick={closeModalColor}>

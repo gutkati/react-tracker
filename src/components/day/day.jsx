@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from "./Day.module.css";
 import {gradientColor, arrMonths, arrDays} from '../../arrays/arrays'
 import {useDispatch, useSelector} from "react-redux";
@@ -16,7 +16,6 @@ const Day = ({index, date}) => {
     const day = arrDays[date.getDay()]
 
     const days = useSelector(selectAllDays)
-    const [markShow, setMarkShow] = useState(null)
 
     const marks = (date) => {
         const dayData = days.find(day => day.date === date.toISOString().split('T')[0]);
@@ -75,23 +74,6 @@ const Day = ({index, date}) => {
 };
 
 export default Day;
-
-
-// useEffect(() => {
-//     let prevDays = days.find(day => day.date === date.toISOString().split('T')[0])
-//     if (prevDays) {
-//         const updatedMarks = prevDays.arrTracker.map(tracker => (
-//             <div
-//                 key={tracker.id}
-//                 style={{backgroundColor: tracker.color}}
-//                 className={styles.mark__circle}
-//                 data-tooltip={tracker.name} // Используем `data-tooltip` атрибут
-//                 onClick={() => removeMarkTracker(tracker.id)}
-//             />
-//         ))
-//         setMarkShow(updatedMarks);
-//     }
-// }, [days, arrShowDays])
 
 
 // markShow: useEffect срабатывает при каждом изменении days и обновляет markShow для отображения выполненных трекеров.
