@@ -1,24 +1,27 @@
 .subtitle {
-    width: 95%;
+    width: 80%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
-    padding: 10px;
+    padding: 10px 0;
     box-sizing: border-box;
 }
 
-.subtitle p:first-child {
-    margin-left: 80px;
-}
+/*.subtitle p:first-child {*/
+/*    margin-left: 10px;*/
+/*}*/
 
 .text {
     color: #B996D7;
-    font-size: 20px;
+    font-size: 14px;
 }
 
 .title {
-    font-size: 40px;
+    font-size: 36px;
     color: #B996D7;
     line-height: 45px;
+    flex: 1;
+    text-align: center;
+    margin-right: 70px;
 }
