@@ -15,7 +15,7 @@ const Header = () => {
             <Title text='Универсальный трекер дел'/>
             <div className={styles.box__buttons}>
 
-                <NavLink to='/createTracer'>
+                <NavLink to='/create'>
                     <InputStyle  value='Создать трекер' type='button' size='size__small'/>
                 </NavLink>
 

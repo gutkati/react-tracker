@@ -116,13 +116,13 @@ const EditTracker = () => {
                     id: tracker.id, name, quantity, color, message, checked
                 }
             ))
-            navigate('/trackers')
+            navigate('/')
         }
     }
 
     function removeTracker() {
         dispatch(trackerRemove({id: tracker.id}))
-        navigate('/trackers')
+        navigate('/')
     }
 
     return (
@@ -221,9 +221,9 @@ const EditTracker = () => {
             </form>
 
             <div className={stylesEdit.container__buttons}>
-                <NavLink to='/trackers'>
-                    <ButtonUnderline text='к списку трекеров'/>
-                </NavLink>
+                {/*<NavLink to='/trackers'>*/}
+                {/*    <ButtonUnderline text='к списку трекеров'/>*/}
+                {/*</NavLink>*/}
                 <NavLink to='/'>
                     <ButtonUnderline text='на главную'/>
                 </NavLink>

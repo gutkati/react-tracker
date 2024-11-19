@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./root";
 import TrackerList from "./parts/trackers/trackerList/trackerList";
@@ -18,12 +18,12 @@ const router = createBrowserRouter([
     },
 
     {
-        path: '/createTracer',
+        path: '/create',
         element: <CreateTracker/>
     },
 
     {
-        path: '/editTracker/:trackerId',
+        path: '/edit/:trackerId',
         element: <EditTracker/>
     }
 

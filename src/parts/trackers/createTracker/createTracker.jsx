@@ -214,9 +214,9 @@ const CreateTracker = () => {
             </form>
 
             <div className={styles.container__buttons}>
-                <NavLink to='/trackers'>
-                    <ButtonUnderline text='к списку трекеров'/>
-                </NavLink>
+                {/*<NavLink to='/trackers'>*/}
+                {/*    <ButtonUnderline text='к списку трекеров'/>*/}
+                {/*</NavLink>*/}
                 <NavLink to='/'>
                     <ButtonUnderline text='на главную'/>
                 </NavLink>

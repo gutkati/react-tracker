@@ -83,7 +83,7 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
     return (
         <div className={styles.container}>
-            <NavLink to='/trackers' className={styles.modal__edit}/>
+            <NavLink to={`/edit/${id}`} className={styles.modal__edit}/>
             <div
                 className={styles.btn__tracker}
                 style={{backgroundColor: color}}
