@@ -14,12 +14,12 @@
 
 /* Стиль для кастомного чекбокса */
 .check__mark {
-  width: 35px;
-  height: 35px;
-  background: rgba(215, 215, 215, 0.25);
+  width: 30px;
+  height: 30px;
+  background: rgba(215, 215, 215, 0.3);
   position: relative;
   transition: background-color 0.3s;
-  /*border-radius: 3px;*/
+  border-radius: 50%;
 }
 
 /* Иконка галочки */
@@ -27,10 +27,10 @@
   content: "";
   position: absolute;
   display: none;
-  left: 12px;
-  top: 5px;
-  width: 10px;
-  height: 17px;
+  left: 9px;
+  top: 3px;
+  width: 9px;
+  height: 16px;
   border: solid #9AF915;
   border-width: 0 2px 2px 0;
   transform: rotate(40deg);

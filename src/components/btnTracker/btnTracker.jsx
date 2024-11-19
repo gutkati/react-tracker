@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import styles from './BtnTracker.module.css'
 import InputStyle from "../inpytStyle/inputStyle";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectTrackerId} from "../../parts/trackers/trackersSlice";
 import {selectAllDays} from "../../parts/days/daysSlice";
+import Checkbox from "../checkbox/checkbox";
 
 const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
@@ -21,8 +22,8 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
     // получить массив текущей недели
     function getCurrentWeek() {
         const today = new Date();
-        const dayOfWeek = today.getDay();
-        const startOfCurrentWeek = new Date(today);
+        const dayOfWeek = today.getDay()
+        const startOfCurrentWeek = new Date(today)
 
         // Определяем начало текущей недели (понедельник)
         startOfCurrentWeek.setDate(today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1))
@@ -82,28 +83,44 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
     return (
         <div className={styles.container}>
-            <div className={styles.btn__tracker} style={{backgroundColor: color}}>
-                <p className={styles.mark__calendar}
-                   onClick={() => onClick(trackerId, name, color)}>
-                    {name}
-                </p>
-                {
-                    modalShow
-                        ?
-                        <button className={styles.arrow__modal_close} onClick={closeModal}/>
-                        :
-                        <button className={styles.arrow__modal} onClick={openModal}/>
-                }
+            <NavLink to='/trackers' className={styles.modal__edit}/>
+            <div
+                className={styles.btn__tracker}
+                style={{backgroundColor: color}}
+                // className={styles.mark__circle}
+                //     data-tooltip={tracker.name}
+            >
 
-                {
-                    message && (dayWeek > 4 || dayWeek === 0) && (remainder !== 0) && (checkTracker < quantity)
-                        ?
-                        <div className={styles.mark}>
-                            <p>{remainder}</p>
-                        </div>
-                        :
-                        ''
-                }
+
+                <div className={styles.btn__tracker_small}
+                     style={{"--btn-color": color}}
+                     data-color={color}
+                >
+                    <p className={styles.mark__calendar}
+                       onClick={() => onClick(trackerId, name, color)}>
+                        {name}
+                    </p>
+                    {/*{*/}
+                    {/*    modalShow*/}
+                    {/*        ?*/}
+                    {/*        <button className={styles.arrow__modal_close} onClick={closeModal}/>*/}
+                    {/*        :*/}
+                    {/*        <button className={styles.arrow__modal} onClick={openModal}/>*/}
+                    {/*}*/}
+
+                    {
+                        message && (dayWeek > 4 || dayWeek === 0) && (remainder !== 0) && (checkTracker < quantity)
+                            ?
+                            <div className={styles.mark__red}>
+                                <p>{remainder}</p>
+                            </div>
+                            :
+                            <div className={styles.mark}>
+                                <p>{checkTracker}/{quantity}</p>
+                            </div>
+                    }
+                </div>
+
 
             </div>
             {
@@ -125,6 +142,12 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
                     :
                     ''
             }
+
+            <Checkbox
+                info='showInfo'
+                checked={message}
+                // onChecked={onCheckedChange}
+            />
 
         </div>
     )

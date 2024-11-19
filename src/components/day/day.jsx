@@ -12,6 +12,7 @@ const Day = ({index, date}) => {
     const dispatch = useDispatch()
 
     const num = date.getDate()
+
     const month = arrMonths[date.getMonth()]
     const day = arrDays[date.getDay()]
     let dayOff = date.getDay()

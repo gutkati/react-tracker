@@ -87,6 +87,7 @@
     margin: 15px 5px;
     cursor: pointer;
     position: relative;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
 }
 
 .mark__circle::after {

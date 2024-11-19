@@ -1,28 +1,53 @@
 .container {
-    max-width: 230px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 35px;
+    position: relative;
 }
 
 .btn__tracker {
-    width: 220px;
-    height: 47px;
-    border-radius: 50px;
-    padding: 8px 15px 8px 20px;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
-    font-size: 15px;
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, .5),
+    0 4px 6px rgba(0, 0, 0, .5);
+
+}
+
+.btn__tracker_small {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-image: linear-gradient(to top, var(--btn-color), rgba(250, 250, 250, .4)); /* По умолчанию — серый */
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.btn__tracker_small[data-color] {
+    --btn-color: attr(data-color color); /* Передаём цвет из атрибута */
 }
 
 .mark__calendar {
-    cursor: pointer;
-    flex: 1;
+    text-align: center;
+    letter-spacing: 0.4px;
+    font-size: 11px;
+    overflow-wrap: break-word; /* Включаем перенос длинных слов */
+    word-break: break-word; /* Подстраховка для старых браузеров */
 }
 
 .mark__calendar:active {
@@ -38,6 +63,25 @@
 }
 
 .mark {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #956599;
+    width: 27px;
+    height: 27px;
+    padding: 1px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 6px;
+    left: -4px;
+    font-size: 12px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .3);
+    font-weight: bold;
+}
+
+.mark__red {
     border-radius: 50%;
     background-color: #FF243C;
     width: 25px;
@@ -46,8 +90,8 @@
     padding: 2px;
     box-sizing: border-box;
     position: absolute;
-    top: -11px;
-    left: -5px;
+    top: 11px;
+    left: 5px;
     font-size: 14px;
 }
 
@@ -102,4 +146,27 @@
 
 .modal p span {
     font-size: 16px;
+}
+
+.modal__edit {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-image: url("../../images/btn__settings.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px;
+    cursor: pointer;
+    transition: background-image 0.2s;
+    position: absolute;
+    top: 0;
+    left: 27px;
+}
+
+.modal__edit:hover {
+    background-image: url("../../images/btn__settings-hover.png");
+}
+
+.container:hover .modal__edit {
+    display: inline-block;
 }
