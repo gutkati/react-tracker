@@ -27,13 +27,29 @@ const Day = ({index, date}) => {
         // Если для дня найдены трекеры, создаем для них элементы; иначе возвращаем пустой массив
         return dayData
             ? dayData.arrTracker.map(tracker => (
+
                 <div
-                    key={tracker.id}
-                    style={{backgroundColor: tracker.color}}
-                    className={styles.mark__circle}
-                    data-tooltip={tracker.name}
+                    className={styles.box__circle}
                     onClick={() => removeMarkTracker(tracker.id)}  // Для удаления трекера
-                />
+                >
+                    <div
+                        key={tracker.id}
+                        style={{backgroundColor: tracker.color}}
+                        className={styles.mark__circle}
+                        data-tooltip={tracker.name}
+
+                    >
+
+                    </div>
+                    {
+                        date.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0] && (
+                            <div className={styles.mark__circle_close}/>
+                        )
+                    }
+
+                </div>
+
+
             ))
             : [];  // Пустой массив, если нет трекеров для дня
     };
@@ -59,9 +75,7 @@ const Day = ({index, date}) => {
     return (
         <div className={styles.box__day}>
 
-
             <p className={styles.month}>{month}</p>
-
 
             <div className={`${styles.circle} ${styles[gradient]}`}>
                 <div className={styles.little__circle}>
@@ -77,7 +91,7 @@ const Day = ({index, date}) => {
                 <p>{day}</p>
             </div>
 
-             <div>
+            <div>
                 {/*{markShow}*/}
                 {marks(date)}
             </div>

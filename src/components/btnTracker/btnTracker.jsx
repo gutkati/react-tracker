@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import {selectTrackerId} from "../../parts/trackers/trackersSlice";
 import {selectAllDays} from "../../parts/days/daysSlice";
 import Checkbox from "../checkbox/checkbox";
+import ModalInfo from "../modalInfo/modalInfo";
 
 const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
@@ -83,71 +84,58 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
     return (
         <div className={styles.container}>
-            <NavLink to={`/edit/${id}`} className={styles.modal__edit}/>
-            <div
-                className={styles.btn__tracker}
-                style={{backgroundColor: color}}
-                // className={styles.mark__circle}
-                //     data-tooltip={tracker.name}
-            >
 
+            <div className={styles.container__btn}>
 
-                <div className={styles.btn__tracker_small}
-                     style={{"--btn-color": color}}
-                     data-color={color}
+                <NavLink to={`/edit/${id}`} className={styles.modal__edit}/>
+
+                <div
+                    className={styles.btn__tracker}
+                    style={{backgroundColor: color}}
+                    onClick={() => onClick(trackerId, name, color)}
                 >
-                    <p className={styles.mark__calendar}
-                       onClick={() => onClick(trackerId, name, color)}>
-                        {name}
-                    </p>
-                    {/*{*/}
-                    {/*    modalShow*/}
-                    {/*        ?*/}
-                    {/*        <button className={styles.arrow__modal_close} onClick={closeModal}/>*/}
-                    {/*        :*/}
-                    {/*        <button className={styles.arrow__modal} onClick={openModal}/>*/}
-                    {/*}*/}
 
-                    {
-                        message && (dayWeek > 4 || dayWeek === 0) && (remainder !== 0) && (checkTracker < quantity)
-                            ?
-                            <div className={styles.mark__red}>
-                                <p>{remainder}</p>
-                            </div>
-                            :
-                            <div className={styles.mark}>
-                                <p>{checkTracker}/{quantity}</p>
-                            </div>
-                    }
+                    <div className={styles.btn__tracker_small} style={{"--btn-color": color}} data-color={color}>
+
+                        <p className={styles.mark__calendar}>
+                            {name}
+                        </p>
+
+                    </div>
                 </div>
 
 
             </div>
-            {
-                modalShow
-                    ?
-                    <div className={styles.modal} style={{backgroundColor: color}}>
-                        {
-                            dayWeek > 4 || dayWeek === 0
-                                ?
-                                <p>Осталось дней: <span>{endWeek}</span></p>
-                                :
-                                ''
-                        }
 
-                        <p>Запланировано: <span>{quantity}</span></p>
-                        <p>Выполнено: <span>{checkTracker}</span></p>
-                        <Link to={to}><InputStyle type='button' value='Настройки'/></Link>
-                    </div>
+            {
+                message && (dayWeek > 4 || dayWeek === 0) && (remainder !== 0) && (checkTracker < quantity)
+                    ?
+                    <>
+                        <div className={`${styles.mark} ${styles.mark__red}`}>
+                            <p>{checkTracker}/{quantity}</p>
+                        </div>
+                        <div className={styles.modal__info_day}>
+                            <ModalInfo info={`осталось дней: ${endWeek}`}/>
+                        </div>
+                    </>
                     :
-                    ''
+                    <div className={styles.mark}>
+                        <p>{checkTracker}<span>/{quantity}</span></p>
+                    </div>
             }
 
-            <Checkbox
-                info='showInfo'
-                checked={message}
-                // onChecked={onCheckedChange}
-            />
+            <div className={styles.checkbox}>
+                <Checkbox
+                    info='showInfo'
+                    checked={message}
+                    // onChecked={onCheckedChange}
+                />
+
+                <div className={styles.modal__info}>
+                    <ModalInfo info='Скрыть трекер'/>
+                </div>
+            </div>
+
 
         </div>
     )
@@ -155,3 +143,38 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
 
 
 export default BtnTracker;
+
+{/*{*/
+}
+{/*    modalShow*/
+}
+{/*        ?*/
+}
+{/*        <button className={styles.arrow__modal_close} onClick={closeModal}/>*/
+}
+{/*        :*/
+}
+{/*        <button className={styles.arrow__modal} onClick={openModal}/>*/
+}
+{/*}*/
+}
+
+// {
+//                 modalShow
+//                     ?
+//                     <div className={styles.modal} style={{backgroundColor: color}}>
+//                         {
+//                             dayWeek > 4 || dayWeek === 0
+//                                 ?
+//                                 <p>Осталось дней: <span>{endWeek}</span></p>
+//                                 :
+//                                 ''
+//                         }
+//
+//                         <p>Запланировано: <span>{quantity}</span></p>
+//                         <p>Выполнено: <span>{checkTracker}</span></p>
+//                         <Link to={to}><InputStyle type='button' value='Настройки'/></Link>
+//                     </div>
+//                     :
+//                     ''
+//             }

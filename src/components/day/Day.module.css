@@ -7,6 +7,7 @@
 
 .month {
     color: rgba(250, 250, 250, .7);
+    font-size: 14px;
 }
 
 .square {
@@ -80,14 +81,20 @@
     justify-content: center;
 }
 
+.box__circle {
+    position: relative;
+    padding: 0 10px;
+
+}
+
 .mark__circle {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    margin: 15px 5px;
     cursor: pointer;
     position: relative;
     box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
+    margin: 15px 5px;
 }
 
 .mark__circle::after {
@@ -110,3 +117,37 @@
 .mark__circle:hover::after {
     opacity: 1; /* Показ `tooltip` при наведении */
 }
+
+.mark__circle:hover + .mark__circle_close {
+    display: inline-block;
+}
+
+.mark__circle_close {
+    display: none;
+    width: 10px;
+    height: 10px;
+    background-image: url("../../images/close-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px;
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+    cursor: pointer;
+}
+
+/*.mark__circle_close {*/
+/*    display: none; !* Скрыто по умолчанию *!*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    background: red;*/
+/*    width: 10px;*/
+/*    height: 10px;*/
+/*    border-radius: 50%;*/
+/*}*/
+
+/*.mark__circle:hover + .mark__circle_close {*/
+/*    display: block; !* Показывается при наведении *!*/
+/*}*/
