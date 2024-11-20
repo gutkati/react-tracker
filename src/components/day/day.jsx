@@ -3,102 +3,105 @@ import styles from "./Day.module.css";
 import {gradientColor, arrMonths, arrDays} from '../../arrays/arrays'
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllDays, markRemove} from "../../parts/days/daysSlice";
+import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
 
 const Day = ({index, date}) => {
 
-    let gradient = gradientColor[index]
-    const currentDate = new Date()
+        const trackers = useSelector(selectAllTrackers)
+        let gradient = gradientColor[index]
+        const currentDate = new Date()
+        const dispatch = useDispatch()
+        const num = date.getDate()
+        const month = arrMonths[date.getMonth()]
+        const day = arrDays[date.getDay()]
+        let dayOff = date.getDay()
+        const days = useSelector(selectAllDays)
+        const tooltipClose = date.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0]
 
-    const dispatch = useDispatch()
+    // массив с отмеченными трекерами
+        const arrFilterCheck = trackers.filter(tracker => tracker.checked)
 
-    const num = date.getDate()
+        const daysFilter = days.map(day => ({
+            ...day, // Сохраняем остальные свойства дня
+            arrTracker: day.arrTracker.filter(el =>
+                arrFilterCheck.some(tracker => tracker.name === el.name) // получаем совпадения
+            )
+        }))
 
-    const month = arrMonths[date.getMonth()]
-    const day = arrDays[date.getDay()]
-    let dayOff = date.getDay()
+        const marks = (date) => {
+                // Фильтруем трекеры по состоянию checked
+                const dayData = daysFilter.find(day => day.date === date.toISOString().split('T')[0])
 
-    console.log('day', index)
+                // Если день найден, создаем элементы; если нет, возвращаем пустой массив
+                if (dayData) {
+                    return dayData.arrTracker.map(dayTracker => (
 
-    const days = useSelector(selectAllDays)
+                        <div key={dayTracker.id} className={styles.box__circle}>
+                            <div
+                                style={{backgroundColor: dayTracker.color}}
+                                className={styles.mark__circle}
+                                data-tooltip={dayTracker.name}
+                                onClick={() => removeMarkTracker(dayTracker.id)} // Для удаления трекера
+                            />
+                            {tooltipClose && (
+                                <div className={styles.mark__circle_close}/>
+                            )}
+                        </div>
 
-    const marks = (date) => {
-        const dayData = days.find(day => day.date === date.toISOString().split('T')[0]);
+                    ))
 
-        // Если для дня найдены трекеры, создаем для них элементы; иначе возвращаем пустой массив
-        return dayData
-            ? dayData.arrTracker.map(tracker => (
-
-                <div
-                    className={styles.box__circle}
-                    onClick={() => removeMarkTracker(tracker.id)}  // Для удаления трекера
-                >
-                    <div
-                        key={tracker.id}
-                        style={{backgroundColor: tracker.color}}
-                        className={styles.mark__circle}
-                        data-tooltip={tracker.name}
-
-                    >
-
-                    </div>
-                    {
-                        date.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0] && (
-                            <div className={styles.mark__circle_close}/>
-                        )
-                    }
-
-                </div>
+                } else {
+                    return []
+                }
 
 
-            ))
-            : [];  // Пустой массив, если нет трекеров для дня
-    };
+            }
 
-    function removeMarkTracker(id) {
-        let nowDate = new Date().toISOString().split('T')[0] // перевести в формат YYYY-MM-DD
+        function removeMarkTracker(id) {
+            let nowDate = new Date().toISOString().split('T')[0] // перевести в формат YYYY-MM-DD
 
-        // если день текущий, применяем удаление отметок
-        if (date.toISOString().split('T')[0] === nowDate) {
-            let todayTracker = days.find(day => day.date === nowDate)
+            // если день текущий, применяем удаление отметок
+            if (date.toISOString().split('T')[0] === nowDate) {
+                let todayTracker = days.find(day => day.date === nowDate)
 
-            if (todayTracker) {
-                todayTracker.arrTracker.find(mark => {
-                    if (mark.id === id) {
-                        dispatch(markRemove({id: mark.id, nowDate}))
-                    }
-                })
+                if (todayTracker) {
+                    todayTracker.arrTracker.find(mark => {
+                        if (mark.id === id) {
+                            dispatch(markRemove({id: mark.id, nowDate}))
+                        }
+                    })
+                }
             }
         }
-    }
 
-    // Чтобы сравнить две даты, лучше использовать toDateString(), это позволит сравнить только день, месяц и год
-    return (
-        <div className={styles.box__day}>
+// Чтобы сравнить две даты, лучше использовать toDateString(), это позволит сравнить только день, месяц и год
+        return (
+            <div className={styles.box__day}>
 
-            <p className={styles.month}>{month}</p>
+                <p className={styles.month}>{month}</p>
 
-            <div className={`${styles.circle} ${styles[gradient]}`}>
-                <div className={styles.little__circle}>
-                    <p>{num}</p>
+                <div className={`${styles.circle} ${styles[gradient]}`}>
+                    <div className={styles.little__circle}>
+                        <p>{num}</p>
+                    </div>
                 </div>
-            </div>
 
-            <div
-                className={`${styles.square} 
+                <div
+                    className={`${styles.square} 
                 ${currentDate.toDateString() === date.toDateString() ? styles.mark__square : ''}
                 ${dayOff === 6 || dayOff === 0 ? styles.off__square : ''}
                 `}>
-                <p>{day}</p>
-            </div>
+                    <p>{day}</p>
+                </div>
 
-            <div>
-                {/*{markShow}*/}
-                {marks(date)}
-            </div>
+                <div>
+                    {marks(date)}
+                </div>
 
-        </div>
-    );
-};
+            </div>
+        );
+    }
+;
 
 export default Day;
 
@@ -128,3 +131,41 @@ export default Day;
 //
 // }, [days])
 // {currentDate.toDateString() === date.toDateString()}
+
+
+// const marks = (date) => {
+//
+//                 const dayData = days.find(day => day.date === date.toISOString().split('T')[0]);
+//
+//             // Если для дня найдены трекеры, создаем для них элементы; иначе возвращаем пустой массив
+//             return dayData
+//                 ? dayData.arrTracker.map(tracker => (
+//
+//                     <div
+//                         key={tracker.id}
+//                         className={styles.box__circle}
+//
+//                     >
+//                         <div
+//                             key={tracker.id}
+//                             style={{backgroundColor: tracker.color}}
+//                             className={styles.mark__circle}
+//                             data-tooltip={tracker.name}
+//                             onClick={() => removeMarkTracker(tracker.id)}  // Для удаления трекера
+//                         >
+//
+//                         </div>
+//                         {
+//                             tooltipClose && (
+//                                 <div className={styles.mark__circle_close}/>
+//                             )
+//                         }
+//
+//                     </div>
+//
+//
+//                 ))
+//                 : [];  // Пустой массив, если нет трекеров для дня
+//
+//     };
+

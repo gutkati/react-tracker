@@ -89,6 +89,10 @@
     cursor: pointer;
 }
 
+.mark__green {
+    background-color: #008049;
+}
+
 .modal__info_day {
     display: none;
     position: absolute;

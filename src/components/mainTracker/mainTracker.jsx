@@ -20,7 +20,6 @@ const MainTracker = () => {
     function saveMarkTracker(id, name, color) {
         // преобразуем дату в формат YYYY-MM-DD
         let nowDate = new Date().toISOString().split('T')[0]
-        console.log('data', id, nowDate, name, color)
 
         // проверяем сегодняшнюю дату с датой в массиве дней
         let existingTracker = days.find(day => day.date === nowDate)
@@ -98,7 +97,7 @@ const MainTracker = () => {
                 {trackers.length
                     ?
                     trackers.map((tracker) => (
-                        tracker.checked &&
+                        // tracker.checked &&
                         <BtnTracker
                             key={tracker.id}
                             id={tracker.id}
@@ -108,6 +107,7 @@ const MainTracker = () => {
                             message={tracker.message}
                             to={`/editTracker/${tracker.id}`}
                             onClick={() => saveMarkTracker(tracker.id, tracker.name, tracker.color)}
+                            checked={tracker.checked}
                         />))
                     :
                     <InfoBox/>

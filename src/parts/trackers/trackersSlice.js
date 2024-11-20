@@ -56,6 +56,7 @@ const trackersSlice = createSlice({
 
             if (desiredTracker) {
                 desiredTracker.checked = checked
+                saveDataLockStorage('trackers', state.trackers)
             }
         },
         trackerEdit(state, action) {

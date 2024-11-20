@@ -2,20 +2,24 @@ import React, {useState} from 'react';
 import styles from './BtnTracker.module.css'
 import InputStyle from "../inpytStyle/inputStyle";
 import {Link, useParams, NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {selectTrackerId} from "../../parts/trackers/trackersSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAllTrackers, selectTrackerId, trackerChecked} from "../../parts/trackers/trackersSlice";
 import {selectAllDays} from "../../parts/days/daysSlice";
 import Checkbox from "../checkbox/checkbox";
 import ModalInfo from "../modalInfo/modalInfo";
 
-const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
+const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) => {
+
 
     let params = useParams()
     const {trackerId} = params
     const tracker = useSelector(state => selectTrackerId(state, trackerId))
+    const trackers = useSelector(selectAllTrackers)
     const days = useSelector(selectAllDays)
+    const dispatch = useDispatch()
 
-    const [modalShow, setModalShow] = useState(false)
+    console.log('id:', id)
+
     let date = new Date
     const dayWeek = date.getDay()
     let endWeek = showDayWeek(dayWeek)
@@ -74,12 +78,18 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
         }
     }
 
-    function openModal() {
-        setModalShow(true)
-    }
+    const onCheckedChange = () => {
+        const tracker = trackers.find(tracker => tracker.id === id)
 
-    function closeModal() {
-        setModalShow(false)
+        if (tracker) {
+            dispatch(
+                trackerChecked({
+                    id: tracker.id,
+                    checked: !tracker.checked
+                })
+            )
+        }
+
     }
 
     return (
@@ -112,7 +122,7 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
                     ?
                     <>
                         <div className={`${styles.mark} ${styles.mark__red}`}>
-                            <p>{checkTracker}/{quantity}</p>
+                            <p>{quantity}/{checkTracker}</p>
                         </div>
                         <div className={styles.modal__info_day}>
                             <ModalInfo info={`осталось дней: ${endWeek}`}/>
@@ -120,15 +130,22 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick}) => {
                     </>
                     :
                     <div className={styles.mark}>
-                        <p>{checkTracker}<span>/{quantity}</span></p>
+                        <p><span>{quantity}/</span>{checkTracker}</p>
                     </div>
+            }
+
+            {
+                (checkTracker == quantity || checkTracker > quantity) &&
+                <div className={`${styles.mark} ${styles.mark__green}`}>
+                    <p>{quantity}/{checkTracker}</p>
+                </div>
             }
 
             <div className={styles.checkbox}>
                 <Checkbox
                     info='showInfo'
-                    checked={message}
-                    // onChecked={onCheckedChange}
+                    checked={checked}
+                    onChecked={onCheckedChange}
                 />
 
                 <div className={styles.modal__info}>
