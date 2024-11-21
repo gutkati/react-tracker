@@ -122,7 +122,7 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) 
                     ?
                     <>
                         <div className={`${styles.mark} ${styles.mark__red}`}>
-                            <p>{quantity}/{checkTracker}</p>
+                            <p>{checkTracker}/{quantity}</p>
                         </div>
                         <div className={styles.modal__info_day}>
                             <ModalInfo info={`осталось дней: ${endWeek}`}/>
@@ -130,14 +130,14 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) 
                     </>
                     :
                     <div className={styles.mark}>
-                        <p><span>{quantity}/</span>{checkTracker}</p>
+                        <p>{checkTracker}/<span>{quantity}</span></p>
                     </div>
             }
 
             {
                 (checkTracker == quantity || checkTracker > quantity) &&
                 <div className={`${styles.mark} ${styles.mark__green}`}>
-                    <p>{quantity}/{checkTracker}</p>
+                    <p>{checkTracker}/{quantity}</p>
                 </div>
             }
 
@@ -148,9 +148,18 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) 
                     onChecked={onCheckedChange}
                 />
 
+
                 <div className={styles.modal__info}>
-                    <ModalInfo info='Скрыть трекер'/>
+                    {
+                        checked
+                            ?
+                            <ModalInfo info='Скрыть трекер'/>
+                            :
+                            <ModalInfo info='Показать трекер'/>
+                    }
+
                 </div>
+
             </div>
 
 

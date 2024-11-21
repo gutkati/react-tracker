@@ -9,7 +9,7 @@ import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline
 import {colors} from "../../../arrays/arrays";
 import {NavLink, useParams, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {trackerEdit, selectTrackerId, trackerRemove} from "../trackersSlice";
+import {trackerEdit, selectTrackerId, trackerRemove, selectAllTrackers} from "../trackersSlice";
 import styles from "./EditTracker.module.css";
 
 const EditTracker = () => {
@@ -21,6 +21,9 @@ const EditTracker = () => {
     const dispatch = useDispatch()
 
     const tracker = useSelector(state => selectTrackerId(state, trackerId))
+
+    const trackers = useSelector(selectAllTrackers)
+    const selectedColors = trackers.map(tracker => tracker.color)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -64,14 +67,28 @@ const EditTracker = () => {
         } else if (!num.test(quantity)) {
             setErrorQuantity('Введите положительное число')
             return false
-        } else if (Number(quantity) > 0) {
+        } else if (Number(quantity) > 0 && Number(quantity) < 8) {
             setErrorQuantity('')
             return true
         } else {
-            setErrorQuantity('Введите положительное число');
+            setErrorQuantity('Введите число от 1 до 7');
             return false;
         }
 
+    }
+
+    const validateColor = (color) => {
+        let isColorTaken = trackers.some(tracker => tracker.color === color)
+        if (isColorTaken) {
+            // setColor(color)
+            //setErrorColor('Такой цвет уже выбран!')
+            return false
+
+        } else {
+            // setErrorColor('')
+            setColor(color)
+            return true
+        }
     }
 
     const stopPropagation = (e) => {
@@ -84,7 +101,7 @@ const EditTracker = () => {
 
     function incNum() {
         let res = Number(quantity)
-        if (res < 99) {
+        if (res < 7) {
             setQuantity(res + 1)
         }
     }
@@ -106,12 +123,12 @@ const EditTracker = () => {
 
     function handleColorSelect(color) {
         setIsModalOpen(false)
-        setColor(color)
+        validateColor(color)
     }
 
 
     function saveDataTracker() {
-        if (name && quantity > 0) {
+        if (name && (quantity > 0 && quantity < 8)) {
             dispatch(trackerEdit({
                     id: tracker.id, name, quantity, color, message, checked
                 }
@@ -237,7 +254,10 @@ const EditTracker = () => {
                                 <div
                                     key={index}
                                     className={stylesEdit.circle__color}
-                                    style={{backgroundColor: color}}
+                                    style={{
+                                        backgroundColor: color,
+                                        cursor: selectedColors.includes(color) ? 'not-allowed' : 'pointer', // Делаем кнопку недоступной
+                                    }}
                                     onClick={() => handleColorSelect(color)}
                                 />
                             ))}

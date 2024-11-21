@@ -24,7 +24,7 @@ const Day = ({index, date}) => {
         const daysFilter = days.map(day => ({
             ...day, // Сохраняем остальные свойства дня
             arrTracker: day.arrTracker.filter(el =>
-                arrFilterCheck.some(tracker => tracker.name === el.name) // получаем совпадения
+                arrFilterCheck.some(tracker => tracker.id === el.id) // получаем совпадения
             )
         }))
 
