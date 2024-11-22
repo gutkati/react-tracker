@@ -10,6 +10,11 @@
     transition: border 0.2s;
 }
 
+.input::placeholder {
+    color: #B996D7;
+    font-size: 14px;
+}
+
 .size__small {
     width: 170px;
 }

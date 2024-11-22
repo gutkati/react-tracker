@@ -7,25 +7,34 @@ import Checkbox from "../../../components/checkbox/checkbox";
 import Footer from "../../../components/footer/footer";
 import ButtonUnderline from "../../../components/buttonUnderline/buttonUnderline";
 import {colors} from "../../../arrays/arrays";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers, trackerAdded} from "../trackersSlice";
 import stylesEdit from "../editTrcaker/EditTracker.module.css";
+import ModalInfo from "../../../components/modalInfo/modalInfo";
+import ModalSuccessSave from "../../../components/modalSuccessSave/modalSuccessSave";
 
 
 const CreateTracker = () => {
     const dispatch = useDispatch()
     const trackers = useSelector(selectAllTrackers)
+    const navigate = useNavigate()
 
     const currentDate = new Date()
     let day = currentDate.getDay()
 
+
     // массив с цветами
-    const selectedColors = trackers.map(tracker => tracker.color)
+
     // отфильтровать не выбранные цвета
-    const filteredColors = colors.filter(color => !selectedColors.includes(color))
 
     // выбрать рандомный цвет
+
+    const [showColor, setShowColor] = useState([null])
+
+    console.log('@@@', showColor)
+    //const selectedColors = showTracker.map(tracker => tracker.color)
+    const filteredColors = colors.filter(color => !showColor.includes(color))
     const randomColor = getRandomColor(filteredColors)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,7 +49,8 @@ const CreateTracker = () => {
     const [errorQuantity, setErrorQuantity] = useState('')
     const [errorColor, setErrorColor] = useState('')
 
-    const [showTracker, setShowTracker] = useState([null])
+    const [showModalSave, setShowModalSave] = useState(false)
+
 
     const onNameChange = (e) => {
         setName(e.target.value)
@@ -73,11 +83,11 @@ const CreateTracker = () => {
         } else if (!num.test(quantity)) {
             setErrorQuantity('Введите положительное число')
             return false
-        } else if (Number(quantity) > 0) {
+        } else if (Number(quantity) > 0 && Number(quantity) < 8) {
             setErrorQuantity('')
             return true
         } else {
-            setErrorQuantity('Введите положительное число');
+            setErrorQuantity('Введите число от 1 до 7');
             return false;
         }
 
@@ -136,12 +146,24 @@ const CreateTracker = () => {
 
     function saveDataTracker() {
 
-        if (name && quantity > 0) {
+        if (name && (quantity > 0 && quantity < 8)) {
             dispatch(trackerAdded(name, quantity, color, message, checked))
             setName('')
             setQuantity('1')
-            // setShowTracker([showTracker.push(color)])
-            //navigate(`/editTracker/${trackerId}`)
+            setColor(randomColor)
+            //setShowTracker([showTracker.push(color)])
+            // navigate('/')
+
+            setShowModalSave(true);
+
+            // Установить таймер на 2 секунды для скрытия
+            const timer = setTimeout(() => {
+                setShowModalSave(false);
+            }, 2000);
+
+            // Очистить таймер при размонтировании
+            return () => clearTimeout(timer);
+
 
         } else {
             validateName(name)
@@ -154,10 +176,10 @@ const CreateTracker = () => {
     }
 
     function getRandomColor(colors) {
-    if (colors.length === 0) return '#939393'; // Если массив пуст, возвращаем цвет заглушку
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
-}
+        if (colors.length === 0) return '#939393'; // Если массив пуст, возвращаем цвет заглушку
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        return colors[randomIndex];
+    }
 
     useEffect(() => {
         let arrTracker = []
@@ -165,16 +187,9 @@ const CreateTracker = () => {
             arrTracker.push(track.color)
 
         })
-        setShowTracker(arrTracker)
+        setShowColor(arrTracker)
 
     }, [trackers])
-
-
-
-
-
-    console.log('filter', filteredColors)
-
 
     return (
         <div className={styles.edit__tracker} onClick={closeModalColor}>
@@ -240,6 +255,29 @@ const CreateTracker = () => {
 
                         </div>
                         {/*<label className={styles.label}>{errorColor}</label>*/}
+
+                        {
+                            isModalOpen ?
+                                <div className={stylesEdit.modal__colors} onClick={(e) => stopPropagation(e)}>
+                                    <div className={stylesEdit.box__scroll}>
+                                        <div className={stylesEdit.list__colors}>
+                                            {colors.map((color, index) => (
+                                                <div
+                                                    key={index}
+                                                    className={stylesEdit.circle__color}
+                                                    style={{
+                                                        backgroundColor: color,
+                                                        cursor: showColor.includes(color) ? 'not-allowed' : 'pointer', // Делаем кнопку недоступной
+                                                    }}
+                                                    onClick={() => handleColorSelect(color)}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                : ''
+                        }
                     </div>
 
                 </div>
@@ -267,34 +305,13 @@ const CreateTracker = () => {
                     <ButtonUnderline text='на главную'/>
                 </NavLink>
             </div>
-            {
-                isModalOpen ?
-                    <div className={styles.modal__colors} onClick={(e) => stopPropagation(e)}>
-                        <div className={styles.list__colors}>
-                            {colors.map((color, index) => (
 
-                                <div
-                                    key={index}
-                                    className={styles.circle__color}
-                                    style={
-                                        {
-                                            backgroundColor: color,
-                                            // opacity: selectedColors.includes(color) ? 0.3 : 1, // Если цвет выбран, уменьшаем прозрачность
-                                            cursor: selectedColors.includes(color) ? 'not-allowed' : 'pointer', // Делаем кнопку недоступной
-                                        }}
-                                    onClick={() => handleColorSelect(color)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    : ''
-            }
 
             <div className={styles.save__tracker}>
                 {
-                    showTracker.length
+                    showColor.length
                         ?
-                        showTracker.map((color, index) => (
+                        showColor.map((color, index) => (
                             <div
                                 key={index}
                                 className={styles.show__color}
@@ -305,6 +322,7 @@ const CreateTracker = () => {
                         ''
                 }
             </div>
+            <ModalSuccessSave showModal={showModalSave}/>
             <Footer/>
         </div>
     );

@@ -23,6 +23,7 @@ const EditTracker = () => {
     const tracker = useSelector(state => selectTrackerId(state, trackerId))
 
     const trackers = useSelector(selectAllTrackers)
+    // массив с использующимися цветами
     const selectedColors = trackers.map(tracker => tracker.color)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -189,24 +190,6 @@ const EditTracker = () => {
                     </div>
                 </div>
 
-
-                {/*<div className={stylesEdit.container__input} onClick={(e) => stopPropagation(e)}>*/}
-                {/*    <p className={stylesEdit.title__input}>Количество:</p>*/}
-
-                {/*    <div className={stylesEdit.container__color2}>*/}
-                {/*        <div>{quantity}</div>*/}
-
-                {/*        <div className={styles.container__arrow}>*/}
-                {/*            <div className={styles.btn__mark_close} onClick={incNum}/>*/}
-
-                {/*            <div className={styles.btn__mark} onClick={decNum}/>*/}
-                {/*        </div>*/}
-
-
-                {/*    </div>*/}
-                {/*</div>*/}
-
-
                 <div className={stylesEdit.container__input} onClick={(e) => stopPropagation(e)}>
                     <p className={stylesEdit.title__input}>Цвет кнопки:</p>
 
@@ -220,6 +203,29 @@ const EditTracker = () => {
                                 <div className={styles.btn__mark} onClick={showModal}/>
                         }
                     </div>
+
+                    {
+                        isModalOpen ?
+                            <div className={stylesEdit.modal__colors} onClick={(e) => stopPropagation(e)}>
+                                <div className={stylesEdit.box__scroll}>
+                                    <div className={stylesEdit.list__colors}>
+                                    {colors.map((color, index) => (
+                                        <div
+                                            key={index}
+                                            className={stylesEdit.circle__color}
+                                            style={{
+                                                backgroundColor: color,
+                                                cursor: selectedColors.includes(color) ? 'not-allowed' : 'pointer', // Делаем кнопку недоступной
+                                            }}
+                                            onClick={() => handleColorSelect(color)}
+                                        />
+                                    ))}
+                                </div>
+                                </div>
+
+                            </div>
+                            : ''
+                    }
                 </div>
 
 
@@ -246,25 +252,6 @@ const EditTracker = () => {
                 </NavLink>
                 <ButtonUnderline text='удалить трекер' onHandleClick={removeTracker}/>
             </div>
-            {
-                isModalOpen ?
-                    <div className={stylesEdit.modal__colors} onClick={(e) => stopPropagation(e)}>
-                        <div className={stylesEdit.list__colors}>
-                            {colors.map((color, index) => (
-                                <div
-                                    key={index}
-                                    className={stylesEdit.circle__color}
-                                    style={{
-                                        backgroundColor: color,
-                                        cursor: selectedColors.includes(color) ? 'not-allowed' : 'pointer', // Делаем кнопку недоступной
-                                    }}
-                                    onClick={() => handleColorSelect(color)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    : ''
-            }
 
             <Footer/>
         </div>
