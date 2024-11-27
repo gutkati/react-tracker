@@ -167,7 +167,10 @@ const EditTracker = () => {
                             maxlength='17'
                             onBlur={handleBlurName}
                         />
-                        <label className={styles.label}>{errorName}</label>
+                        <div className={stylesEdit.container__label}>
+                            <label className={styles.label}>{errorName}</label>
+                        </div>
+
                     </div>
                 </div>
 
@@ -186,7 +189,11 @@ const EditTracker = () => {
 
                             <div className={styles.btn__mark} onClick={decNum}/>
                         </div>
-                        <label className={styles.label}>{errorQuantity}</label>
+
+                        <div className={stylesEdit.container__label}>
+                            <label className={styles.label}>{errorQuantity}</label>
+                        </div>
+
                     </div>
                 </div>
 
@@ -209,18 +216,18 @@ const EditTracker = () => {
                             <div className={stylesEdit.modal__colors} onClick={(e) => stopPropagation(e)}>
                                 <div className={stylesEdit.box__scroll}>
                                     <div className={stylesEdit.list__colors}>
-                                    {colors.map((color, index) => (
-                                        <div
-                                            key={index}
-                                            className={stylesEdit.circle__color}
-                                            style={{
-                                                backgroundColor: color,
-                                                cursor: selectedColors.includes(color) ? 'not-allowed' : 'pointer', // Делаем кнопку недоступной
-                                            }}
-                                            onClick={() => handleColorSelect(color)}
-                                        />
-                                    ))}
-                                </div>
+                                        {colors.map((color, index) => (
+                                            <div
+                                                key={index}
+                                                className={stylesEdit.circle__color}
+                                                style={{
+                                                    backgroundColor: color,
+                                                    cursor: selectedColors.includes(color) ? 'not-allowed' : 'pointer', // Делаем кнопку недоступной
+                                                }}
+                                                onClick={() => handleColorSelect(color)}
+                                            />
+                                        ))}
+                                    </div>
                                 </div>
 
                             </div>
@@ -229,7 +236,7 @@ const EditTracker = () => {
                 </div>
 
 
-                <div className={stylesEdit.container__input}>
+                <div className={`${stylesEdit.container__input} ${stylesEdit.container__input_margin}`}>
                     <p className={stylesEdit.title__input}>Показывать уведомления:</p>
                     <Checkbox
                         info='showInfo'
@@ -241,17 +248,17 @@ const EditTracker = () => {
                 <div className={stylesEdit.gradient__border} onClick={saveDataTracker}>
                     Сохранить
                 </div>
+                <div className={stylesEdit.container__buttons}>
+                    {/*<NavLink to='/trackers'>*/}
+                    {/*    <ButtonUnderline text='к списку трекеров'/>*/}
+                    {/*</NavLink>*/}
+                    <NavLink to='/'>
+                        <ButtonUnderline text='на главную'/>
+                    </NavLink>
+                    <ButtonUnderline text='удалить трекер' onHandleClick={removeTracker}/>
+                </div>
             </form>
 
-            <div className={stylesEdit.container__buttons}>
-                {/*<NavLink to='/trackers'>*/}
-                {/*    <ButtonUnderline text='к списку трекеров'/>*/}
-                {/*</NavLink>*/}
-                <NavLink to='/'>
-                    <ButtonUnderline text='на главную'/>
-                </NavLink>
-                <ButtonUnderline text='удалить трекер' onHandleClick={removeTracker}/>
-            </div>
 
             <Footer/>
         </div>

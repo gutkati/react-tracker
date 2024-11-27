@@ -33,11 +33,18 @@ const CreateTracker = () => {
     const [showColor, setShowColor] = useState([null])
 
     console.log('@@@', showColor)
-    //const selectedColors = showTracker.map(tracker => tracker.color)
-    const filteredColors = colors.filter(color => !showColor.includes(color))
+    const selectedColors = trackers.map(tracker => tracker.color)
+    const filteredColors = colors.filter(color => !selectedColors.includes(color))
+
+
+
     const randomColor = getRandomColor(filteredColors)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+     console.log('selectedColors', selectedColors)
+    console.log('filteredColors', filteredColors)
+    console.log('randomColor', randomColor)
 
     const [name, setName] = useState('')
     const [quantity, setQuantity] = useState('1')
@@ -215,7 +222,11 @@ const CreateTracker = () => {
                             maxlength='17'
                             onBlur={handleBlurName}
                         />
-                        <label className={styles.label}>{errorName}</label>
+
+                        <div className={stylesEdit.container__label}>
+                            <label className={styles.label}>{errorName}</label>
+                        </div>
+
                     </div>
 
                 </div>
@@ -235,7 +246,11 @@ const CreateTracker = () => {
 
                             <div className={styles.btn__mark} onClick={decNum}/>
                         </div>
-                        <label className={styles.label}>{errorQuantity}</label>
+
+                        <div className={stylesEdit.container__label}>
+                            <label className={styles.label}>{errorQuantity}</label>
+                        </div>
+
                     </div>
                 </div>
 
@@ -283,7 +298,7 @@ const CreateTracker = () => {
                 </div>
 
 
-                <div className={styles.container__input}>
+                <div className={`${stylesEdit.container__input} ${stylesEdit.container__input_margin}`}>
                     <p className={styles.title__input}>Показывать уведомления:</p>
                     <Checkbox
                         info='showInfo'
@@ -295,9 +310,8 @@ const CreateTracker = () => {
                 <div className={styles.gradient__border} onClick={saveDataTracker}>
                     Сохранить
                 </div>
-            </form>
 
-            <div className={styles.container__buttons}>
+                <div className={styles.container__buttons}>
                 {/*<NavLink to='/trackers'>*/}
                 {/*    <ButtonUnderline text='к списку трекеров'/>*/}
                 {/*</NavLink>*/}
@@ -305,6 +319,9 @@ const CreateTracker = () => {
                     <ButtonUnderline text='на главную'/>
                 </NavLink>
             </div>
+            </form>
+
+
 
 
             <div className={styles.save__tracker}>

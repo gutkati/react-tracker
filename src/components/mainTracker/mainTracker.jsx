@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './MainTracker.module.css'
 import InfoBox from "../infoBox/infoBox";
 import InputStyle from "../inpytStyle/inputStyle";
@@ -8,14 +8,20 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
 import BtnTracker from "../btnTracker/btnTracker";
 import {selectAllDays, daysAdded, trackerDaysAdded} from "../../parts/days/daysSlice";
+import {useMediaQuery} from "react-responsive"; //
 
 const MainTracker = () => {
 
-    const [arrShowDays, setArrShowDays] = useState(getDaysRange())
+    const [arrShowDays, setArrShowDays] = useState([])
     const trackers = useSelector(selectAllTrackers)
     const days = useSelector(selectAllDays)
+    const isSmallScreen = useMediaQuery({maxWidth: 650});
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        setArrShowDays(getDaysRange())
+    }, [isSmallScreen])
 
     function saveMarkTracker(id, name, color) {
         // преобразуем дату в формат YYYY-MM-DD
@@ -52,42 +58,65 @@ const MainTracker = () => {
         const startOfPreviousWeek = new Date(startOfCurrentWeek)
         startOfPreviousWeek.setDate(startOfCurrentWeek.getDate() - 7)
 
+        // Проверяем ширину экрана
+
+        // Количество дней (7 для маленьких экранов, 14 для остальных)
         const days = []
-        for (let i = 0; i < 14; i++) {
-            const day = new Date(startOfPreviousWeek)
-            day.setDate(startOfPreviousWeek.getDate() + i)
+        if (isSmallScreen) {
+            for (let i = 0; i < 7; i++) {
+                const day = new Date(startOfCurrentWeek)
+                day.setDate(startOfCurrentWeek.getDate() + i)
 
-            days.push(day)
+                days.push(day)
+            }
+        } else {
+            for (let i = 0; i < 14; i++) {
+                const day = new Date(startOfPreviousWeek)
+                day.setDate(startOfPreviousWeek.getDate() + i)
+
+                days.push(day)
+            }
         }
-
         return days
     }
 
-    // карусель календаря назад на 3 дня
+// карусель календаря назад на 3 дня
     function showPrevDays() {
         let firstDayArr = arrShowDays[0] // первый день массива
 
-        for (let i = 1; i < 4; i++) {
+        for (let i = 1; i < 3; i++) {
             const newDay = new Date(firstDayArr)
             newDay.setDate(firstDayArr.getDate() - i)
             arrShowDays.unshift(newDay)
         }
+        let arrPrevDays
+        if (isSmallScreen) {
+            arrPrevDays = arrShowDays.slice(0, 7)
+        } else {
+            arrPrevDays = arrShowDays.slice(0, 14)
+        }
 
-        let arrPrevDays = arrShowDays.slice(0, 14)
         setArrShowDays(arrPrevDays)
     }
 
-    // карусель календаря вперед на 3 дня
+// карусель календаря вперед на 3 дня
     function showNextDays() {
         let lastDayArr = arrShowDays[arrShowDays.length - 1] // последний день массива
 
-        for (let i = 1; i < 4; i++) {
+        for (let i = 1; i < 3; i++) {
             const newDay = new Date(lastDayArr)
             newDay.setDate(lastDayArr.getDate() + i)
             arrShowDays.push(newDay)
         }
 
-        let arrPrevDays = arrShowDays.slice(-14)
+        let arrPrevDays
+        if (isSmallScreen) {
+            arrPrevDays = arrShowDays.slice(-7)
+        } else {
+            arrPrevDays = arrShowDays.slice(-14)
+        }
+
+        // let arrPrevDays = arrShowDays.slice(-14)
         setArrShowDays(arrPrevDays)
     }
 
@@ -110,7 +139,7 @@ const MainTracker = () => {
                             checked={tracker.checked}
                         />))
                     :
-                    <InfoBox/>
+                    <InfoBox text='Универсальный трекер дел — это инструмент, предназначенный для эффективного управления и отслеживания задач в различных сферах жизни, таких как работа, учёба, спорт или личные цели. Он помогает структурировать задачи, следить за их выполнением, контролировать сроки и мотивирует на достижение поставленных целей.'/>
                 }
             </div>
 

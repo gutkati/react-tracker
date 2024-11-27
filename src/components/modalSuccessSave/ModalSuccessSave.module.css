@@ -1,4 +1,4 @@
-.container__save{
+.container__save {
     width: 300px;
     min-height: 250px;
     border-radius: 20px;
@@ -18,7 +18,7 @@
 }
 
 .title {
-    font-size: 20px;
+    font-size: 24px;
     color: #393939;
     text-align: center;
 }
@@ -68,4 +68,39 @@
 
 .overlay.show {
     opacity: 1;
+}
+
+@media screen and (max-width: 650px) {
+    .container__save {
+        width: 200px;
+        min-height: 150px;
+        padding: 10px;
+
+    }
+
+    .box__img {
+        width: 200px;
+        height: 120px;
+    }
+
+    .img {
+        width: 100px;
+        background-size: 100px;
+    }
+
+    .show {
+        width: 200px;
+        min-height: 150px;
+        padding: 10px;
+    }
+
+    .overlay {
+        width: 200px;
+
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 }

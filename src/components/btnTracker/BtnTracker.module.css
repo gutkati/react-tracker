@@ -199,3 +199,63 @@
     left: 100%;
     top: 60%;
 }
+
+@media screen and (max-width: 928px) {
+
+    .btn__tracker {
+        width: 80px;
+        height: 80px;
+    }
+
+    .btn__tracker_small {
+        width: 70px;
+        height: 70px;
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+
+    .container {
+        margin: 15px 0;
+    }
+
+    .btn__tracker {
+        width: 74px;
+        height: 74px;
+    }
+
+    .btn__tracker_small {
+        width: 64px;
+        height: 64px;
+    }
+
+    .mark__calendar {
+        font-size: 9px;
+        font-weight: bold;
+    }
+
+    .mark {
+        width: 24px;
+        height: 24px;
+        padding: 1px;
+        top: 18px;
+        left: -6px;
+        font-size: 10px;
+    }
+
+    .mark span {
+        /*color: #e5ccff;*/
+        font-weight: bold;
+    }
+
+    .modal__edit {
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        background-size: 26px;
+        top: -15px;
+        left: 24px;
+    }
+
+}

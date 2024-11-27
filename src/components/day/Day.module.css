@@ -82,9 +82,10 @@
 }
 
 .box__circle {
+    width: 25px;
+    height: 25px;
     position: relative;
     padding: 0 10px;
-
 }
 
 .mark__circle {
@@ -94,7 +95,7 @@
     cursor: pointer;
     position: relative;
     box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
-    margin: 15px 5px;
+    margin: 15px 0;
 }
 
 .mark__circle::after {
@@ -120,34 +121,79 @@
 
 .mark__circle:hover + .mark__circle_close {
     display: inline-block;
+    opacity: 1;
 }
 
 .mark__circle_close {
     display: none;
     width: 10px;
     height: 10px;
+        border-radius: 50%;
     background-image: url("../../images/close-icon.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 10px;
     position: absolute;
-    bottom: 12px;
-    right: 15px;
+    bottom: 15px;
+    left: 20px;
     cursor: pointer;
+    /*opacity: 0;*/
 }
 
-/*.mark__circle_close {*/
-/*    display: none; !* Скрыто по умолчанию *!*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    background: red;*/
-/*    width: 10px;*/
-/*    height: 10px;*/
-/*    border-radius: 50%;*/
-/*}*/
+@media screen and (max-width: 928px) {
 
-/*.mark__circle:hover + .mark__circle_close {*/
-/*    display: block; !* Показывается при наведении *!*/
-/*}*/
+    .box__day {
+        width: 42px;
+    }
+
+    .month {
+        font-size: 12px;
+    }
+
+    .circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .little__circle {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    .square {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    .mark__circle {
+        width: 20px;
+        height: 20px;
+    }
+
+    .mark__circle_close {
+        bottom: 42px;
+        left: 20px;
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+
+    /*.mark__circle {*/
+    /*    cursor: auto;*/
+    /*}*/
+    .mark__circle_close {
+        opacity: 0.6; /* Полностью видим */
+        display: block; /* Элемент отображается */
+        visibility: visible; /* Убедиться, что элемент виден */
+        bottom: 15px;
+        left: 25px;
+    }
+
+    .mark__circle:hover::after {
+        opacity: 0; /* Показ `tooltip` при наведении */
+        visibility: hidden;
+    }
+}

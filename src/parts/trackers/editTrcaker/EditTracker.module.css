@@ -1,12 +1,14 @@
 .edit__tracker {
-    width: 100vw;
-    height: 100vh;
+    width: 550px;
+    /*height: 100vh;*/
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 10px;
+    justify-content: center;
+
     box-sizing: border-box;
     position: relative;
+    margin: 0 auto;
 }
 
 .header {
@@ -47,8 +49,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     position: relative;
+}
+
+.container__input_margin {
+    margin: 35px 0;
 }
 
 .title__input {
@@ -63,6 +69,13 @@
 
 .position {
     position: relative;
+}
+
+.container__label {
+    width: 100%;
+    height: 20px;
+    padding: 2px;
+    box-sizing: border-box;
 }
 
 .label {
@@ -184,7 +197,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 30px;
+    gap: 100px;
     margin: 30px 0 20px;
 }
 
@@ -231,8 +244,8 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 20px 0 0;
-     flex-wrap: wrap;
+    margin: 10px 0 0;
+    flex-wrap: wrap;
 }
 
 .show__color {
@@ -241,3 +254,50 @@
     border-radius: 50%;
     margin: 10px;
 }
+
+@media screen and (max-width: 650px) {
+    .edit__tracker {
+        width: 300px;
+    }
+
+    .container__title {
+        margin-right: 0;
+    }
+
+    .edit__form {
+        width: 300px;
+    }
+
+    .container__input {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .title__input {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .save__tracker {
+        display: none;
+    }
+
+    .container__buttons {
+        width: 100%;
+        gap: 50px;
+    }
+
+    .modal__colors {
+        width: 260px;
+        max-height: 150px;
+        top: 85px;
+        left: 20px;
+    }
+
+    .label {
+        color: #ff374b;
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+

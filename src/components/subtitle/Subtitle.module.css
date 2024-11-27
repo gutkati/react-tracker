@@ -1,5 +1,5 @@
 .subtitle {
-    width: 80%;
+    width: 70%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -23,4 +23,53 @@
     flex: 1;
     text-align: center;
     margin-right: 70px;
+}
+
+@media screen and (max-width: 1280px) {
+    .subtitle {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+
+    .subtitle {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 928px) {
+    .title {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    .subtitle {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+    .subtitle {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .title {
+        margin: 0;
+        font-weight: bold;
+        display: none;
+
+    }
+
+    .text {
+        display: none;
+    }
 }

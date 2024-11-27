@@ -14,3 +14,10 @@
     color: #ffffff;
     cursor: pointer;
 }
+
+@media screen and (max-width: 650px) {
+    .btn {
+        font-size: 12px;
+        font-weight: bold;
+    }
+}

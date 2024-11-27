@@ -1,11 +1,11 @@
 .main {
-    width: 80%;
+    width: 70%;
     padding: 10px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .container__trackers {
@@ -41,12 +41,13 @@
     height: 21px;
     transition: background-image .2s;
     margin-top: 90px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .prev {
     composes: style__btn;
     background-image: url("../../images/prev.png");
-
 }
 
 .prev:hover {
@@ -85,6 +86,7 @@
     justify-content: space-between;
     align-items: flex-start;
     flex: 1;
+    transition: display 0.8s ease
 }
 
 
@@ -106,12 +108,51 @@
 
 }
 
-/*.filter__list {*/
-/*    composes: input size__big from '../inpytStyle/InputStyle.module.css';*/
-/*    text-align: center;*/
-/*    padding: 10px;*/
-/*    appearance: none; !* Убирает стандартную стрелку в большинстве браузеров *!*/
-/*    -webkit-appearance: none; !* Для WebKit-браузеров *!*/
-/*    -moz-appearance: none; !* Для Firefox *!*/
-/*    background: url('../../images/arrow-list2.svg') no-repeat right 20px center; !* Путь к вашему изображению стрелки *!*/
-/*}*/
+@media screen and (max-width: 1280px) {
+    .main {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+
+    .main {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    .main {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+
+    }
+
+    .container__marks {
+        width: 100%;
+        gap: 10px;
+
+    }
+
+    .prev {
+        background-size: 14px;
+    }
+
+    .next {
+        background-size: 14px;
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+
+    .container__trackers {
+
+    }
+}
+
+
+
+

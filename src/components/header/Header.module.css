@@ -1,5 +1,5 @@
 .header {
-    width: 80%;
+    width: 70%;
     height: 100px;
     padding: 10px 0;
     box-sizing: border-box;
@@ -15,6 +15,62 @@
 
 .box__buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    gap: 10px;
 }
+
+.link__desc {
+    font-size: 14px;
+    color: #B996D7;
+}
+
+.link__desc:hover {
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.styles.box__description {
+    max-width: 100px;
+    background-color: #bfbfbf;
+    border-radius: 20px;
+
+}
+
+@media screen and (max-width: 1280px) {
+    .header {
+        width: 80%;
+    }
+}
+
+
+@media screen and (max-width: 1120px) {
+    .header .logo:first-child {
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .header {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .header {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .header {
+        flex-direction: column;
+        min-height: 150px;
+        /*justify-content: center;*/
+        align-items: center;
+        gap: 20px;
+        padding: 0 0 20px;
+    }
+}
+
