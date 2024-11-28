@@ -9,6 +9,8 @@
 }
 
 .container__btn {
+    width: 86px;
+    height: 86px;
     padding-top: 20px;
     position: relative;
 }
@@ -25,6 +27,11 @@
     position: relative;
     box-shadow: inset 0 -4px 6px rgba(0, 0, 0, .5),
     0 4px 6px rgba(0, 0, 0, .5);
+}
+
+.btn__tracker:hover {
+    width: 86px;
+    height: 86px;
 }
 
 .btn__tracker:active {
@@ -52,10 +59,12 @@
 
 .mark__calendar {
     text-align: center;
-    letter-spacing: 0.4px;
-    font-size: 11px;
+    letter-spacing: 0.8px;
+    font-size: 12px;
     overflow-wrap: break-word; /* Включаем перенос длинных слов */
     word-break: break-word; /* Подстраховка для старых браузеров */
+    hyphens: auto;
+
 }
 
 .arrow__modal {
@@ -202,9 +211,19 @@
 
 @media screen and (max-width: 928px) {
 
+    .container__btn {
+        width: 82px;
+        height: 82px;
+    }
+
     .btn__tracker {
         width: 80px;
         height: 80px;
+    }
+
+    .btn__tracker:hover {
+        width: 82px;
+        height: 82px;
     }
 
     .btn__tracker_small {
@@ -220,7 +239,17 @@
         margin: 15px 0;
     }
 
+    .container__btn {
+        width: 76px;
+        height: 76px;
+    }
+
     .btn__tracker {
+        width: 74px;
+        height: 74px;
+    }
+
+    .btn__tracker:hover {
         width: 74px;
         height: 74px;
     }

@@ -7,6 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .header .logo:first-child {
@@ -18,6 +19,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    position: relative;
 }
 
 .link__desc {
@@ -30,12 +32,53 @@
     color: #ffffff;
 }
 
-.styles.box__description {
-    max-width: 100px;
-    background-color: #bfbfbf;
+.box__description {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #926b91;
     border-radius: 20px;
-
+    position: absolute;
+    left: -105%;
+    top: 110%;
+    z-index: 10;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .4);
 }
+
+.text__description {
+    text-align: justify;
+    font-size: 14px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    height: fit-content;
+    color: #fadff9;
+}
+
+.text__description span {
+    font-weight: bold;
+    color: #fadff9;
+}
+
+.close__description {
+    background-image: url("../../images/close-icon.svg");
+    width: 18px;
+    height: 18px;
+    background-size: 15px;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-self: flex-end;
+    transition: background-size 0.1s;
+    margin-bottom: 5px;
+}
+
+.close__description:hover {
+    cursor: pointer;
+    background-size: 18px;
+}
+
 
 @media screen and (max-width: 1280px) {
     .header {

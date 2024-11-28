@@ -9,6 +9,11 @@ import InfoBox from "../infoBox/infoBox";
 const Header = () => {
 
     const [isVisible, setIsVisible] = useState(false)
+
+    function closeModalDesc() {
+        setIsVisible(false)
+    }
+
     return (
         <div className={styles.header}>
             <NavLink to='/' className={styles.logo}>
@@ -26,7 +31,19 @@ const Header = () => {
 
                 {isVisible ?
                     <div className={styles.box__description}>
-                        {/*<p>скоро здесь будет текст</p>*/}
+                        <div className={styles.close__description} onClick={closeModalDesc}/>
+                        <p className={styles.text__description}>Пользователь может создавать новые метки для
+                            отслеживания задач, событий или важных дел.<br/><br/>
+                            Каждая метка содержит:<br/>
+                            - Основной контент (название, запланированное и выполненное количество).<br/>
+                            - Кнопку для редактирования метки.<br/>
+                            - Чекбокс, который показывает/скрывает метки в календаре.<br/><br/>
+                            Метки в календаре можно добавлять (выбирая любой день, пользователь отмечает выполненные
+                            дела) и удалять нажимая на метку в календаре.
+                            <br/><br/>
+                            В настройках пользователь может редактировать название, цвет, запланированное количество и
+                            включать/выключать уведомления. Удалять метку трекера.
+                        </p>
                     </div>
                     : ''
                 }
