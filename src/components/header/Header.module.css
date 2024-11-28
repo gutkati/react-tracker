@@ -115,5 +115,19 @@
         gap: 20px;
         padding: 0 0 20px;
     }
+
+    .link__desc {
+        font-size: 12px;
+    }
+
+    .box__description {
+        width: 300px;
+        left: -38%;
+        top: 90px;
+    }
+
+    .text__description {
+        font-size: 13px;
+    }
 }
 
