@@ -81,6 +81,18 @@
     justify-content: center;
 }
 
+.little__circle:hover {
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    transition: width 3ms;
+
+}
+
+.circle:active {
+    box-shadow: 2px 2px 2px #393939;
+}
+
 .box__circle {
     width: 25px;
     height: 25px;
@@ -111,7 +123,7 @@
     opacity: 0;
     white-space: nowrap;
     pointer-events: none;
-    transition: opacity 0.2s;
+    /*transition: opacity 0.2s;*/
     font-size: 12px;
 }
 
@@ -120,15 +132,16 @@
 }
 
 .mark__circle:hover + .mark__circle_close {
-    display: inline-block;
+    display: block;
     opacity: 1;
+    /*transition: display 0.2s;*/
 }
 
 .mark__circle_close {
     display: none;
     width: 10px;
     height: 10px;
-        border-radius: 50%;
+    border-radius: 50%;
     background-image: url("../../images/close-icon.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -137,7 +150,7 @@
     bottom: 15px;
     left: 20px;
     cursor: pointer;
-    /*opacity: 0;*/
+    opacity: 0;
 }
 
 @media screen and (max-width: 928px) {

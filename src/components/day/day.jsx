@@ -1,24 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./Day.module.css";
 import {gradientColor, arrMonths, arrDays} from '../../arrays/arrays'
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllDays, markRemove} from "../../parts/days/daysSlice";
 import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
 
-const Day = ({index, date}) => {
+const Day = ({index, date, selectDay, onClick}) => {
 
         const trackers = useSelector(selectAllTrackers)
         let gradient = gradientColor[index]
-        const currentDate = new Date()
+
         const dispatch = useDispatch()
         const num = date.getDate()
         const month = arrMonths[date.getMonth()]
         const day = arrDays[date.getDay()]
         let dayOff = date.getDay()
         const days = useSelector(selectAllDays)
-        const tooltipClose = date.toISOString().split('T')[0] === currentDate.toISOString().split('T')[0]
+        const isSelected = selectDay.toDateString() === date.toDateString();
 
-    // массив с отмеченными трекерами
+        console.log('isSelected', isSelected)
+
+        const tooltipClose = date.toISOString().split('T')[0] === selectDay.toISOString().split('T')[0]
+
+        // массив с отмеченными трекерами
         const arrFilterCheck = trackers.filter(tracker => tracker.checked)
 
         const daysFilter = days.map(day => ({
@@ -29,39 +33,41 @@ const Day = ({index, date}) => {
         }))
 
         const marks = (date) => {
-                // Фильтруем трекеры по состоянию checked
-                const dayData = daysFilter.find(day => day.date === date.toISOString().split('T')[0])
+            // Фильтруем трекеры по состоянию checked
+            const dayData = daysFilter.find(day => day.date === date.toISOString().split('T')[0])
 
-                // Если день найден, создаем элементы; если нет, возвращаем пустой массив
-                if (dayData) {
-                    return dayData.arrTracker.map(dayTracker => (
+            // Если день найден, создаем элементы; если нет, возвращаем пустой массив
+            if (dayData) {
+                return dayData.arrTracker.map(dayTracker => (
 
-                        <div key={dayTracker.id} className={styles.box__circle}>
-                            <div
-                                style={{backgroundColor: dayTracker.color}}
-                                className={styles.mark__circle}
-                                data-tooltip={dayTracker.name}
-                                onClick={() => removeMarkTracker(dayTracker.id)} // Для удаления трекера
-                            />
-                            {tooltipClose && (
-                                <div className={styles.mark__circle_close}/>
-                            )}
+                    <div key={dayTracker.id} className={styles.box__circle}>
+                        <div
+                            style={{backgroundColor: dayTracker.color}}
+                            className={styles.mark__circle}
+                            data-tooltip={dayTracker.name}
+                            onClick={() => removeMarkTracker(dayTracker.id)} // Для удаления трекера
+                        >
+
                         </div>
 
-                    ))
+                        {tooltipClose && (
+                                <div className={styles.mark__circle_close}/>
+                            )}
 
-                } else {
-                    return []
-                }
+                    </div>
 
+                ))
 
+            } else {
+                return []
             }
+        }
 
         function removeMarkTracker(id) {
-            let nowDate = new Date().toISOString().split('T')[0] // перевести в формат YYYY-MM-DD
+            let nowDate = date.toISOString().split('T')[0] // перевести в формат YYYY-MM-DD
 
             // если день текущий, применяем удаление отметок
-            if (date.toISOString().split('T')[0] === nowDate) {
+            if (isSelected) {
                 let todayTracker = days.find(day => day.date === nowDate)
 
                 if (todayTracker) {
@@ -80,7 +86,7 @@ const Day = ({index, date}) => {
 
                 <p className={styles.month}>{month}</p>
 
-                <div className={`${styles.circle} ${styles[gradient]}`}>
+                <div className={`${styles.circle} ${styles[gradient]}`} onClick={() => onClick(date)}>
                     <div className={styles.little__circle}>
                         <p>{num}</p>
                     </div>
@@ -88,7 +94,7 @@ const Day = ({index, date}) => {
 
                 <div
                     className={`${styles.square} 
-                ${currentDate.toDateString() === date.toDateString() ? styles.mark__square : ''}
+                ${isSelected ? styles.mark__square : ''} // маркировать выбранный день
                 ${dayOff === 6 || dayOff === 0 ? styles.off__square : ''}
                 `}>
                     <p>{day}</p>

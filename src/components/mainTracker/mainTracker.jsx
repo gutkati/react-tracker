@@ -16,6 +16,16 @@ const MainTracker = () => {
     const trackers = useSelector(selectAllTrackers)
     const days = useSelector(selectAllDays)
     const isSmallScreen = useMediaQuery({maxWidth: 650});
+    const currentDate = new Date()
+    const [selectDay, setSelectDay] = useState(currentDate); // Выбранная дата
+
+    const handleDayClick = (date) => {
+        if(date.getTime() <= currentDate.getTime()){ // если пользователь пытается выбрать будующий день
+            setSelectDay(date); // Устанавливаем новую выбранную дату
+        } else {
+            setSelectDay(currentDate)
+        }
+    }
 
     const dispatch = useDispatch()
 
@@ -25,7 +35,8 @@ const MainTracker = () => {
 
     function saveMarkTracker(id, name, color) {
         // преобразуем дату в формат YYYY-MM-DD
-        let nowDate = new Date().toISOString().split('T')[0]
+        let nowDate = selectDay.toISOString().split('T')[0]
+        let currentDay = currentDate.toISOString().split('T')[0]
 
         // проверяем сегодняшнюю дату с датой в массиве дней
         let existingTracker = days.find(day => day.date === nowDate)
@@ -36,7 +47,7 @@ const MainTracker = () => {
             : false;
 
         // Если даты нет в массиве дней, добавляем новый день с трекером
-        if (!existingTracker) {
+        if (!existingTracker && (nowDate < currentDay)) {
             dispatch(daysAdded(id, nowDate, name, color))
         }
         // Если день существует, но трекер в нем еще не добавлен, добавляем трекер
@@ -153,6 +164,8 @@ const MainTracker = () => {
                                 key={index}
                                 index={index}
                                 date={date}
+                                selectDay={selectDay}
+                                onClick={() => handleDayClick(date)}
                             />
                         ))}
 
