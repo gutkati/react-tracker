@@ -278,7 +278,6 @@
     }
 
     .mark span {
-        /*color: #e5ccff;*/
         font-weight: bold;
     }
 
@@ -290,5 +289,4 @@
         top: -15px;
         left: 24px;
     }
-
 }

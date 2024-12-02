@@ -134,7 +134,6 @@
 .mark__circle:hover + .mark__circle_close {
     display: block;
     opacity: 1;
-    /*transition: display 0.2s;*/
 }
 
 .mark__circle_close {
@@ -194,9 +193,6 @@
 
 @media screen and (max-width: 650px) {
 
-    /*.mark__circle {*/
-    /*    cursor: auto;*/
-    /*}*/
     .mark__circle_close {
         opacity: 0.6; /* Полностью видим */
         display: block; /* Элемент отображается */

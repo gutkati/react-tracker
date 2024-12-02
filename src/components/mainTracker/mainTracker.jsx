@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import styles from './MainTracker.module.css'
 import InfoBox from "../infoBox/infoBox";
-import InputStyle from "../inpytStyle/inputStyle";
 import Day from "../day/day";
-import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers} from "../../parts/trackers/trackersSlice";
 import BtnTracker from "../btnTracker/btnTracker";
 import {selectAllDays, daysAdded, trackerDaysAdded} from "../../parts/days/daysSlice";
-import {useMediaQuery} from "react-responsive"; //
+import {useMediaQuery} from "react-responsive";
 
 const MainTracker = () => {
 
@@ -20,7 +18,7 @@ const MainTracker = () => {
     const [selectDay, setSelectDay] = useState(currentDate); // Выбранная дата
 
     const handleDayClick = (date) => {
-        if(date.getTime() <= currentDate.getTime()){ // если пользователь пытается выбрать будующий день
+        if (date.getTime() <= currentDate.getTime()) { // если пользователь пытается выбрать будующий день
             setSelectDay(date); // Устанавливаем новую выбранную дату
         } else {
             setSelectDay(currentDate)
@@ -47,7 +45,7 @@ const MainTracker = () => {
             : false;
 
         // Если даты нет в массиве дней, добавляем новый день с трекером
-        if (!existingTracker && (nowDate < currentDay)) {
+        if (!existingTracker) {
             dispatch(daysAdded(id, nowDate, name, color))
         }
         // Если день существует, но трекер в нем еще не добавлен, добавляем трекер
@@ -127,7 +125,6 @@ const MainTracker = () => {
             arrPrevDays = arrShowDays.slice(-14)
         }
 
-        // let arrPrevDays = arrShowDays.slice(-14)
         setArrShowDays(arrPrevDays)
     }
 
@@ -137,7 +134,6 @@ const MainTracker = () => {
                 {trackers.length
                     ?
                     trackers.map((tracker) => (
-                        // tracker.checked &&
                         <BtnTracker
                             key={tracker.id}
                             id={tracker.id}
@@ -150,7 +146,8 @@ const MainTracker = () => {
                             checked={tracker.checked}
                         />))
                     :
-                    <InfoBox text='Универсальный трекер дел — это инструмент, предназначенный для эффективного управления и отслеживания задач в различных сферах жизни, таких как работа, учёба, спорт или личные цели. Он помогает структурировать задачи, следить за их выполнением, контролировать сроки и мотивирует на достижение поставленных целей.'/>
+                    <InfoBox
+                        text='Универсальный трекер дел — это инструмент, предназначенный для эффективного управления и отслеживания задач в различных сферах жизни, таких как работа, учёба, спорт или личные цели. Он помогает структурировать задачи, следить за их выполнением, контролировать сроки и мотивирует на достижение поставленных целей.'/>
                 }
             </div>
 
@@ -174,14 +171,6 @@ const MainTracker = () => {
                     <button className={styles.next} onClick={showNextDays}/>
                 </div>
 
-                {/*<div className={styles.container__filter}>*/}
-                {/*    <p className={styles.filter__text}>Оставить нужные трекеры</p>*/}
-
-                {/*    <NavLink to='/trackers' className={styles.filter}>*/}
-                {/*        <InputStyle size='size__small' value='Все трекеры' type='button'/>*/}
-                {/*    </NavLink>*/}
-                {/*</div>*/}
-
             </div>
         </div>
     )
@@ -189,27 +178,3 @@ const MainTracker = () => {
 
 
 export default MainTracker;
-
-
-// function getDaysRange() {
-//            const today = new Date()
-//            console.log('today', today)
-//            const dayOfWeek = today.getDay()
-//            console.log('dayOfWeek', dayOfWeek)
-//            const lastMonday = new Date(today)
-//            console.log('lastMonday', lastMonday)
-//
-//            // Находим понедельник прошлой недели
-//            lastMonday.setDate(today.getDate() - dayOfWeek - 6)
-//
-//
-//            const days = []
-//            for (let i = 0; i < 14; i++) {
-//                const day = new Date(lastMonday)
-//                day.setDate(lastMonday.getDate() + i)
-//                days.push(day)
-//            }
-//
-//            // console.log('days', days)
-//            return days
-//        }

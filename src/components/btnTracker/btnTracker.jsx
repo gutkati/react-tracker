@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styles from './BtnTracker.module.css'
-import InputStyle from "../inpytStyle/inputStyle";
-import {Link, useParams, NavLink} from "react-router-dom";
+import {useParams, NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers, selectTrackerId, trackerChecked} from "../../parts/trackers/trackersSlice";
 import {selectAllDays} from "../../parts/days/daysSlice";
@@ -13,12 +12,9 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) 
 
     let params = useParams()
     const {trackerId} = params
-    const tracker = useSelector(state => selectTrackerId(state, trackerId))
     const trackers = useSelector(selectAllTrackers)
     const days = useSelector(selectAllDays)
     const dispatch = useDispatch()
-
-    console.log('id:', id)
 
     let date = new Date
     const dayWeek = date.getDay()
@@ -114,7 +110,6 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) 
                     </div>
                 </div>
 
-
             </div>
 
             {
@@ -148,7 +143,6 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) 
                     onChecked={onCheckedChange}
                 />
 
-
                 <div className={styles.modal__info}>
                     {
                         checked
@@ -162,45 +156,8 @@ const BtnTracker = ({id, name, quantity, color, message, to, onClick, checked}) 
 
             </div>
 
-
         </div>
     )
 }
 
-
 export default BtnTracker;
-
-{/*{*/
-}
-{/*    modalShow*/
-}
-{/*        ?*/
-}
-{/*        <button className={styles.arrow__modal_close} onClick={closeModal}/>*/
-}
-{/*        :*/
-}
-{/*        <button className={styles.arrow__modal} onClick={openModal}/>*/
-}
-{/*}*/
-}
-
-// {
-//                 modalShow
-//                     ?
-//                     <div className={styles.modal} style={{backgroundColor: color}}>
-//                         {
-//                             dayWeek > 4 || dayWeek === 0
-//                                 ?
-//                                 <p>Осталось дней: <span>{endWeek}</span></p>
-//                                 :
-//                                 ''
-//                         }
-//
-//                         <p>Запланировано: <span>{quantity}</span></p>
-//                         <p>Выполнено: <span>{checkTracker}</span></p>
-//                         <Link to={to}><InputStyle type='button' value='Настройки'/></Link>
-//                     </div>
-//                     :
-//                     ''
-//             }

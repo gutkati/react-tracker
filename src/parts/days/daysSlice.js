@@ -1,4 +1,4 @@
-import {createSlice, nanoid} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 let arr = [
     {
@@ -36,7 +36,6 @@ const daysSlice = createSlice({
             reducer(state, action) {
                 state.days.push(action.payload)
                 saveDataLockStorage('days', state.days)
-                console.log('action', action.payload)
             },
             prepare(id, nowDate, name, color) { // возвращать объект payload с данными:
                 return {
@@ -44,7 +43,6 @@ const daysSlice = createSlice({
                         date: nowDate,
                         arrTracker: [
                             {
-                                // idMark: nanoid(6),
                                 id,
                                 name,
                                 color,
@@ -58,7 +56,6 @@ const daysSlice = createSlice({
         trackerDaysAdded: {
             reducer(state, action) {
                 const {id, name, color, nowDate} = action.payload
-                console.log('action', action.payload)
 
                 const day = state.days.find(day => day.date === nowDate)
 
@@ -71,7 +68,6 @@ const daysSlice = createSlice({
             prepare(id, nowDate, name, color) { // возвращать объект payload с данными:
                 return {
                     payload: {
-                        // idMark: nanoid(6),
                         id,
                         nowDate,
                         name,

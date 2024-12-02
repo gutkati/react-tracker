@@ -4,7 +4,6 @@ import InputStyle from "../inpytStyle/inputStyle";
 import styles from './Header.module.css'
 import Logo from "../logo/logo";
 import {NavLink} from "react-router-dom";
-import InfoBox from "../infoBox/infoBox";
 
 const Header = () => {
 

@@ -11,28 +11,18 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAllTrackers, trackerAdded} from "../trackersSlice";
 import stylesEdit from "../editTrcaker/EditTracker.module.css";
-import ModalInfo from "../../../components/modalInfo/modalInfo";
 import ModalSuccessSave from "../../../components/modalSuccessSave/modalSuccessSave";
 
 
 const CreateTracker = () => {
     const dispatch = useDispatch()
     const trackers = useSelector(selectAllTrackers)
-    const navigate = useNavigate()
 
     const currentDate = new Date()
     let day = currentDate.getDay()
 
-
-    // массив с цветами
-
-    // отфильтровать не выбранные цвета
-
-    // выбрать рандомный цвет
-
     const [showColor, setShowColor] = useState([null])
 
-    console.log('@@@', showColor)
     const selectedColors = trackers.map(tracker => tracker.color)
     const filteredColors = colors.filter(color => !selectedColors.includes(color))
 
@@ -41,10 +31,6 @@ const CreateTracker = () => {
     const randomColor = getRandomColor(filteredColors)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
-
-     console.log('selectedColors', selectedColors)
-    console.log('filteredColors', filteredColors)
-    console.log('randomColor', randomColor)
 
     const [name, setName] = useState('')
     const [quantity, setQuantity] = useState('1')
@@ -103,8 +89,6 @@ const CreateTracker = () => {
     const validateColor = (color) => {
         let isColorTaken = trackers.some(tracker => tracker.color === color)
         if (isColorTaken) {
-            // setColor(color)
-            //setErrorColor('Такой цвет уже выбран!')
             return false
 
         } else {
@@ -124,7 +108,6 @@ const CreateTracker = () => {
 
     function incNum() {
         let res = Number(quantity)
-        // let nowDay = 8 - day
         if (res < 7) {
             setQuantity(res + 1)
         }
@@ -158,9 +141,6 @@ const CreateTracker = () => {
             setName('')
             setQuantity('1')
             setColor(randomColor)
-            //setShowTracker([showTracker.push(color)])
-            // navigate('/')
-
             setShowModalSave(true);
 
             // Установить таймер на 2 секунды для скрытия
@@ -175,10 +155,8 @@ const CreateTracker = () => {
         } else {
             validateName(name)
             validateQuantity(quantity)
-            // validateColor(color)
             errorName
             errorQuantity
-            // errorColor
         }
     }
 
@@ -269,7 +247,6 @@ const CreateTracker = () => {
                             }
 
                         </div>
-                        {/*<label className={styles.label}>{errorColor}</label>*/}
 
                         {
                             isModalOpen ?
@@ -312,17 +289,12 @@ const CreateTracker = () => {
                 </div>
 
                 <div className={styles.container__buttons}>
-                {/*<NavLink to='/trackers'>*/}
-                {/*    <ButtonUnderline text='к списку трекеров'/>*/}
-                {/*</NavLink>*/}
+
                 <NavLink to='/'>
                     <ButtonUnderline text='на главную'/>
                 </NavLink>
             </div>
             </form>
-
-
-
 
             <div className={styles.save__tracker}>
                 {

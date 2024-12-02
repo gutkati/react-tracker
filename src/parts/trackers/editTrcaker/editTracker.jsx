@@ -37,8 +37,6 @@ const EditTracker = () => {
     const [errorName, setErrorName] = useState('')
     const [errorQuantity, setErrorQuantity] = useState('')
 
-    console.log("quantity", typeof quantity)
-
     const onNameChange = (e) => setName(e.target.value)
 
     const handleBlurName = () => {
@@ -81,12 +79,9 @@ const EditTracker = () => {
     const validateColor = (color) => {
         let isColorTaken = trackers.some(tracker => tracker.color === color)
         if (isColorTaken) {
-            // setColor(color)
-            //setErrorColor('Такой цвет уже выбран!')
             return false
 
         } else {
-            // setErrorColor('')
             setColor(color)
             return true
         }
@@ -235,7 +230,6 @@ const EditTracker = () => {
                     }
                 </div>
 
-
                 <div className={`${stylesEdit.container__input} ${stylesEdit.container__input_margin}`}>
                     <p className={stylesEdit.title__input}>Показывать уведомления:</p>
                     <Checkbox
@@ -249,16 +243,12 @@ const EditTracker = () => {
                     Сохранить
                 </div>
                 <div className={stylesEdit.container__buttons}>
-                    {/*<NavLink to='/trackers'>*/}
-                    {/*    <ButtonUnderline text='к списку трекеров'/>*/}
-                    {/*</NavLink>*/}
                     <NavLink to='/'>
                         <ButtonUnderline text='на главную'/>
                     </NavLink>
                     <ButtonUnderline text='удалить трекер' onHandleClick={removeTracker}/>
                 </div>
             </form>
-
 
             <Footer/>
         </div>

@@ -1,15 +1,6 @@
-import {createSlice, nanoid, createAsyncThunk} from "@reduxjs/toolkit";
+import {createSlice, nanoid} from "@reduxjs/toolkit";
 
-const initTrackers = [
-    // {
-    //     id: nanoid(8),
-    //     name: 'Йога',
-    //     quantity: 4,
-    //     color: '#B21E3F',
-    //     message: true,
-    //     checked: true,
-    // },
-]
+const initTrackers = []
 
 const arrTrackers = getListTrackers('trackers', initTrackers)
 
@@ -21,7 +12,6 @@ function getListTrackers(key, initTrackers) {
 function saveDataLockStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data))
 }
-
 
 const initialState = {
     trackers: arrTrackers,
@@ -35,7 +25,6 @@ const trackersSlice = createSlice({
             reducer(state, action) { // обновлять стейт
                 state.trackers.push(action.payload)
                 saveDataLockStorage('trackers', state.trackers)
-                console.log('initialState', action.payload)
             },
             prepare(name, quantity, color, message, checked) { // возвращать объект payload со сгенерированным id и другими нашими данными:
                 return {

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from "./Day.module.css";
 import {gradientColor, arrMonths, arrDays} from '../../arrays/arrays'
 import {useDispatch, useSelector} from "react-redux";
@@ -17,8 +17,6 @@ const Day = ({index, date, selectDay, onClick}) => {
         let dayOff = date.getDay()
         const days = useSelector(selectAllDays)
         const isSelected = selectDay.toDateString() === date.toDateString();
-
-        console.log('isSelected', isSelected)
 
         const tooltipClose = date.toISOString().split('T')[0] === selectDay.toISOString().split('T')[0]
 
@@ -51,8 +49,8 @@ const Day = ({index, date, selectDay, onClick}) => {
                         </div>
 
                         {tooltipClose && (
-                                <div className={styles.mark__circle_close}/>
-                            )}
+                            <div className={styles.mark__circle_close}/>
+                        )}
 
                     </div>
 
@@ -110,68 +108,3 @@ const Day = ({index, date, selectDay, onClick}) => {
 ;
 
 export default Day;
-
-
-// markShow: useEffect срабатывает при каждом изменении days и обновляет markShow для отображения выполненных трекеров.
-// useEffect ожидает, пока Redux обновит days, и только потом обновляет отображение маркеров.
-
-// useEffect(() => {
-//     let nowDate = new Date().toISOString().split('T')[0]
-//     let todayTracker = days.find(day => day.date === nowDate) // по дате находим нужный день
-//     let prevDays = days.find(day => day.date === date.toISOString().split('T')[0])
-//     console.log('date', date.toISOString().split('T')[0])
-//
-//     if (prevDays) {
-//         const updatedMarks = prevDays.arrTracker.map(tracker => (
-//             <div
-//                 key={tracker.id}
-//                 style={{backgroundColor: tracker.color}}
-//                 className={styles.mark__circle}
-//                 data-tooltip={tracker.name} // Используем `data-tooltip` атрибут
-//                 onClick={() => removeMarkTracker(tracker.id)}
-//             />
-//         ))
-//         setMarkShow(updatedMarks);
-//     }
-//
-//
-// }, [days])
-// {currentDate.toDateString() === date.toDateString()}
-
-
-// const marks = (date) => {
-//
-//                 const dayData = days.find(day => day.date === date.toISOString().split('T')[0]);
-//
-//             // Если для дня найдены трекеры, создаем для них элементы; иначе возвращаем пустой массив
-//             return dayData
-//                 ? dayData.arrTracker.map(tracker => (
-//
-//                     <div
-//                         key={tracker.id}
-//                         className={styles.box__circle}
-//
-//                     >
-//                         <div
-//                             key={tracker.id}
-//                             style={{backgroundColor: tracker.color}}
-//                             className={styles.mark__circle}
-//                             data-tooltip={tracker.name}
-//                             onClick={() => removeMarkTracker(tracker.id)}  // Для удаления трекера
-//                         >
-//
-//                         </div>
-//                         {
-//                             tooltipClose && (
-//                                 <div className={styles.mark__circle_close}/>
-//                             )
-//                         }
-//
-//                     </div>
-//
-//
-//                 ))
-//                 : [];  // Пустой массив, если нет трекеров для дня
-//
-//     };
-
